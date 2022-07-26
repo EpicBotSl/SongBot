@@ -1,18 +1,19 @@
 import os
-from pyrogram import idle, filters
 import requests
-import yt_dlp as youtube_dl
-from pyrogram import filters, Client
+import aiohttp
+import youtube_dl
+
+from pyrogram import filters
 from youtube_search import YoutubeSearch
+
+pbot = Client
 
 def time_to_seconds(time):
     stringt = str(time)
     return sum(int(x) * 60 ** i for i, x in enumerate(reversed(stringt.split(':'))))
 
-bot = Client
 
-
-@bot.on_message(filters.command('song') & ~filters.forwarded)
+@pbot.on_message(filters.command(['song']))
 def song(client, message):
 
     user_id = message.from_user.id 
@@ -23,7 +24,7 @@ def song(client, message):
     for i in message.command[1:]:
         query += ' ' + str(i)
     print(query)
-    m = message.reply("🔎 Searching...")
+    m = message.reply('🔎 Finding the song...')
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
@@ -34,39 +35,33 @@ def song(client, message):
         thumb_name = f'thumb{title}.jpg'
         thumb = requests.get(thumbnail, allow_redirects=True)
         open(thumb_name, 'wb').write(thumb.content)
-        
-        performer = f"〢ImSithijaBot〣"  
+
+
         duration = results[0]["duration"]
         url_suffix = results[0]["url_suffix"]
         views = results[0]["views"]
 
     except Exception as e:
         m.edit(
-            "❌ Cannot find song use another keywords"
+            "✖️ Found Nothing. Sorry.\n\nTry another keyword or maybe spell it properly."
         )
         print(str(e))
         return
-    m.edit("📥 Downloading...")
+    m.edit("`Downloading Song... Please wait ⏱`")
     try:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
-        rep = (f"""
-🏷 **Title:** [{title}]({link})
-⏳ **Duration:** `{duration}`
-👀 **Views:** `{views}` 
-👤**Requested By**: {message.from_user.mention()}
-📤 **Uploaded By: [ᴇᴘɪᴄ ᴅᴇᴠᴇʟᴏᴘᴇʀꜱ <s/ʟ>🇱🇰](t.me/EpicBotsSl)**
-        """)
+        rep = f'🎙 **Title**: [{title[:35]}]({link})\n🎬 **Source**: YouTube\n⏱️ **Duration**: `{duration}`\n👁‍🗨 **Views**: `{views}`\n📤 **By**: [✓](https://telegra.ph/file/43e37874c6864b87cd5e2.jpg) [</ᴇᴘɪᴄ ʙᴏᴛs <s/ʟ>🇱🇰](t.me/EpicBotsSl)'
         secmul, dur, dur_arr = 1, 0, duration.split(':')
         for i in range(len(dur_arr)-1, -1, -1):
             dur += (int(dur_arr[i]) * secmul)
             secmul *= 60
-        s = message.reply_audio(audio_file, caption=rep, performer=performer, thumb=thumb_name, title=title, duration=dur)
+        message.reply_audio(audio_file, caption=rep, thumb=thumb_name, parse_mode='md', title=title, duration=dur)
         m.delete()
     except Exception as e:
-        m.edit('❌ Error occurred.')
+        m.edit('❌ Error')
         print(e)
 
     try:
@@ -75,4 +70,5 @@ def song(client, message):
     except Exception as e:
         print(e)
 
-print("song bot started Successfully 🔥")
+
+__mod_name__ = "pyrosong"
