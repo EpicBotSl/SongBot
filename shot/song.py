@@ -19,7 +19,7 @@ async def song_commad_group(client, message: Message, _):
             [
                 InlineKeyboardButton(
                     text=_["SG_B_1"],
-                    url=f"https://t.me/{app.username}?start=song",
+                    url=f"https://t.me/epsongbot?start=song",
                 ),
             ]
         ]
@@ -50,10 +50,10 @@ async def song_commad_private(client, message: Message, _):
         ) = await YouTube.details(url)
         if str(duration_min) == "None":
             return await mystic.edit_text(_["song_3"])
-        if int(duration_sec) > SONG_DOWNLOAD_DURATION_LIMIT:
+        if int(duration_sec) > 400:
             return await mystic.edit_text(
                 _["play_4"].format(
-                    SONG_DOWNLOAD_DURATION, duration_min
+                    400, duration_min
                 )
             )
         buttons = song_markup(_, vidid)
@@ -80,9 +80,9 @@ async def song_commad_private(client, message: Message, _):
         return await mystic.edit_text(_["play_3"])
     if str(duration_min) == "None":
         return await mystic.edit_text(_["song_3"])
-    if int(duration_sec) > SONG_DOWNLOAD_DURATION_LIMIT:
+    if int(duration_sec) > 400:
         return await mystic.edit_text(
-            _["play_6"].format(SONG_DOWNLOAD_DURATION, duration_min)
+            _["play_6"].format(400, duration_min)
         )
     buttons = song_markup(_, vidid)
     await mystic.delete()
