@@ -42,13 +42,6 @@ def song(client, message):
         url_suffix = results[0]["url_suffix"]
         views = results[0]["views"]
 
-    except Exception as e:
-        m.edit(
-            "✖️ Found Nothing. Sorry.\n\nTry another keyword or maybe spell it properly."
-        )
-        print(str(e))
-        return
-    m.edit("`Downloading Song... Please wait ⏱`")
     try:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
