@@ -9,10 +9,7 @@ from youtube_search import YoutubeSearch
 
 app = Client 
 
-@app.on_message(
-    filters.command(song)
-    & filters.group
-)
+@app.on_message(filters.command("song"))
 async def song_commad_group(client, message: Message, _):
     upl = InlineKeyboardMarkup(
         [
@@ -30,10 +27,7 @@ async def song_commad_group(client, message: Message, _):
 # Song Module
 
 
-@app.on_message(
-    filters.command(song)
-    & filters.private
-)
+@app.on_message(filters.command("song"))
 async def song_commad_private(client, message: Message, _):
     await message.delete()
     url = await YouTube.url(message)
