@@ -13,7 +13,7 @@ Multi Functional Song Bot
 </p>
 
 <p align="center">
-  <img src="https://te.legra.ph/file/97e45c843108as0708a7d.jpg">
+  <img src="https://telegra.ph/file/822f7c1ed334728341429.jpg">
 </p>
 
 ## Deploy To Heroku 🔥
