@@ -6,7 +6,6 @@ pyrogram
 tgcrypto
 telegraph
 motor==2.5.1
-pyrogram==2.0.35
 Pyrogram==1.4.16
 marshmallow==3.14.1
 psycopg2-binary
