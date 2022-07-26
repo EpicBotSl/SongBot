@@ -16,7 +16,7 @@ app = Client(
     api_hash=API_HASH,
     bot_token=BOT_TOKEN,
     in_memory=True,
-    plugins=dict(root="module"),
+    plugins=dict(root="shot"),
 )
 
 
