@@ -42,7 +42,6 @@ def song(client, message):
         url_suffix = results[0]["url_suffix"]
         views = results[0]["views"]
 
-    try:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
             audio_file = ydl.prepare_filename(info_dict)
