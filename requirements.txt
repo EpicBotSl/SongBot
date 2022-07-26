@@ -7,7 +7,6 @@ tgcrypto
 asyncio
 DateTime
 Pyrogram==1.4.16
-random
 motor 
 aiofiles
 python-arq
