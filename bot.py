@@ -174,29 +174,33 @@ async def inline(client: Client, query: InlineQuery):
 #---------------------------Song Bot Epic-------------------------------------#
 #-------------------Epic-------------------------------------#
 @bot.on_message(filters.command('lyric'))
-def LyricWikia(artist, title):
-    url = 'http://lyrics.wikia.com/api.php?action=lyrics&artist={artist}&song={title}&fmt=json&func=getSong'.format(
-        artist=artist,
-        title=title).replace(" ", "%20")
-    r = requests.get(url)
-    # We got some bad formatted JSON data... So we need to fix stuff :/
-    returned = r.text
-    returned = returned.replace('"', "")
-    returned = returned.replace("\'", "\"")
-    returned = returned.replace("song = ", "")
-    returned = json.loads(returned)
-    if returned["lyrics"] != "Not found":
-        # set the url to the url we just recieved, and retrieving it
-        r = requests.get(returned["url"])
-        soup = BeautifulSoup(r.text, 'html.parser')
-        soup = soup.find("div", {"class": "lyricbox"})
-        [elem.extract() for elem in soup.findAll('div')]
-        [elem.replaceWith('\n') for elem in soup.findAll('br')]
-        soup = BeautifulSoup(re.sub(r'(<!--[.\s\S]*-->)', '', str(soup)), 'html.parser')
-        [elem.extract() for elem in soup.findAll('script')]
-        return soup.getText()
-    else:
-        return None
+async def sng(bot, message):
+        hy = await message.reply_text("`Searching 🔎`")
+        song = message.text
+        chat_id = message.from_user.id
+        rpl = lyrics(song)
+        await hy.delete()
+        try:
+                await hy.delete()
+                await Ek.send_message(chat_id, text = rpl, reply_to_message_id = message.message_id, reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Dev 🔗 ", url = f"github.com/M-fazin")], [InlineKeyboardButton("🧑‍💻 Channel", url = "https://telegram.me/EKBOTZ_UPDATE"),InlineKeyboardButton("🗃️ Source Code", url = "https://github.com/M-fazin/Lyrics-Search-Bot")]]))
+        except Exception as e:
+        	await message.reply_text(f"I Can't Find A Song With `{song}`", quote = True, reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("🧑‍💻 Developer", url = f"github.com/M-fazin")], [InlineKeyboardButton("🧑‍💻 Channel", url = "https://telegram.me/EKBOTZ_UPDATE"),InlineKeyboardButton("🗃️ Source Code", url = "https://github.com/M-fazin/Lyrics-Search-Bot")]]))
+
+
+def search(song):
+        r = requests.get(API + song)
+        find = r.json()
+        return find
+       
+def lyrics(song):
+        fin = search(song)
+        text = f'**🎶 Successfully Extracted Lyrics Of {song} 🎶**\n\n\n\n'
+        text += f'`{fin["lyrics"]}`'
+        text += '\n\n\n**||Made With ❤️ By @EpicBotsSl||**'
+        return text
+
+
+Ek.run()
 
 print (f"""
 #╔════╗────────╔═══╗
