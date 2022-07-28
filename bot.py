@@ -17,6 +17,8 @@ bot = Client(
     api_hash= API_HASH,
 )
 
+#---------------------------Song Bot Epic-------------------------------------#
+#-----------Song Section Epic-------------------------------------#
 
 def time_to_seconds(time):
     stringt = str(time)
@@ -73,6 +75,17 @@ def song(client, message):
     m.edit("▢𝐒𝐞𝐧𝐝𝐢𝐧𝐠▢")
     m.edit("▣𝐒𝐞𝐧𝐝𝐢𝐧𝐠▣")
     m.edit("▢𝐒𝐞𝐧𝐝𝐢𝐧𝐠▢")
+    m.edit("▣𝐒𝐞𝐧𝐝𝐢𝐧𝐠▣")
+    m.edit("▢𝐒𝐞𝐧𝐝𝐢𝐧𝐠▢")
+    m.edit("▣𝐒𝐞𝐧𝐝𝐢𝐧𝐠▣")
+    m.edit("▢𝐒𝐞𝐧𝐝𝐢𝐧𝐠▢")
+    m.edit("▣𝐒𝐞𝐧𝐝𝐢𝐧𝐠▣")
+    m.edit("▢𝐒𝐞𝐧𝐝𝐢𝐧𝐠▢")
+    m.edit("▣𝐒𝐞𝐧𝐝𝐢𝐧𝐠▣")
+    m.edit("▢𝐒𝐞𝐧𝐝𝐢𝐧𝐠▢")
+    m.edit("▣𝐒𝐞𝐧𝐝𝐢𝐧𝐠▣")
+    m.edit("▢𝐒𝐞𝐧𝐝𝐢𝐧𝐠▢")
+ 
     try:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
@@ -100,6 +113,58 @@ def song(client, message):
         os.remove(thumb_name)
     except Exception as e:
         print(e)
+#---------------------------Song Bot Epic-------------------------------------#
+#----------Inline Section Epic-------------------------------------#
+
+@bot.on_inline_query()
+async def inline(client: Client, query: InlineQuery):
+    answers = []
+    search_query = query.query.lower().strip().rstrip()
+
+    if search_query == "":
+        await bot.answer_inline_query(
+            query.id,
+            results=answers,
+            switch_pm_text="ᴛʏᴩᴇ ᴀ ʏᴏᴜᴛᴜʙᴇ ᴠɪᴅᴇᴏ ɴᴀᴍᴇ...",
+            switch_pm_parameter="help",
+            cache_time=0
+        )
+    else:
+        search = VideosSearch(search_query, limit=50)
+
+        for result in search.result()["result"]:
+            answers.append(
+                InlineQueryResultArticle(
+                    title=result["title"],
+                    description="{}, {} views.".format(
+                        result["duration"],
+                        result["viewCount"]["short"]
+                    ),
+                    input_message_content=InputTextMessageContent(
+                        "https://www.youtube.com/watch?v={}".format(
+                            result["id"]
+                        )
+                    ),
+                    thumb_url=result["thumbnails"][0]["url"]
+                )
+            )
+
+        try:
+            await query.answer(
+                results=answers,
+                cache_time=0
+            )
+        except errors.QueryIdInvalid:
+            await query.answer(
+                results=answers,
+                cache_time=0,
+                switch_pm_text="ᴇʀʀᴏʀ : sᴇᴀʀᴄʜ ᴛɪᴍᴇᴅ ᴏᴜᴛ ",
+                switch_pm_parameter="",
+            )
+
+#---------------------------Song Bot Epic-------------------------------------#
+#-------------------Epic-------------------------------------#
+
 
 print (f"""
 #╔════╗────────╔═══╗
