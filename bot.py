@@ -26,6 +26,8 @@ bot = Client(
     api_hash= API_HASH,
 )
 
+API = "https://apis.xditya.me/lyrics?song="
+
 #---------------------------Song Bot Epic-------------------------------------#
 #-----------Song Section Epic-------------------------------------#
 
