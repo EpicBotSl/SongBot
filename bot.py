@@ -10,19 +10,19 @@ import yt_dlp as youtube_dl
 from pyrogram import filters, Client
 from youtube_search import YoutubeSearch
 
-
 bot = Client(
-"EpDpBot",
-api_id="API_ID",
-api_hash="API_HASH",
-bot_token="BOT_TOKEN"
+    "EpSong Bot",
+    bot_token= BOT_TOKEN,
+    api_id= API_ID,
+    api_hash= API_HASH,
 )
+
 
 def time_to_seconds(time):
     stringt = str(time)
     return sum(int(x) * 60 ** i for i, x in enumerate(reversed(stringt.split(':'))))
 
-@bot.on_message(filters.command('song') & ~filters.forwarded)
+@bot.on_message(filters.command('song'))
 def song(client, message):
 
     user_id = message.from_user.id 
