@@ -9,6 +9,11 @@ from pyrogram.types import *
 import yt_dlp as youtube_dl
 from pyrogram import filters, Client
 from youtube_search import YoutubeSearch
+from pyrogram import errors
+from pyrogram.types import InlineQuery, InlineQueryResultArticle, InputTextMessageContent
+
+from youtubesearchpython import VideosSearch
+
 
 bot = Client(
     "EpSong Bot",
