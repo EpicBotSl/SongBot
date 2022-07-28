@@ -64,3 +64,4 @@ youtube_search
 youtube-search-python
 youtube_search_python
 yt_dlp
+beautifulsoup4==4.8.0
