@@ -4,6 +4,7 @@ Telethon
 pyromod
 pyrogram
 tgcrypto
+pyrogram==1.4.16
 telegraph
 motor==2.5.1
 marshmallow==3.14.1
