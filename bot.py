@@ -33,7 +33,7 @@ def song(client, message):
     for i in message.command[1:]:
         query += ' ' + str(i)
     print(query)
-    m = message.reply("🔎 Searching...")
+    m = message.reply("🔎 𝐬𝐞𝐚𝐫𝐜𝐡𝐢𝐧𝐠...")
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
@@ -45,29 +45,45 @@ def song(client, message):
         thumb = requests.get(thumbnail, allow_redirects=True)
         open(thumb_name, 'wb').write(thumb.content)
         
-        performer = f"〢ImSithijaBot〣"  
+        performer = f"𝙴𝚙 𝚜𝚘𝚗𝚐 𝚋𝚘𝚝"  
         duration = results[0]["duration"]
         url_suffix = results[0]["url_suffix"]
         views = results[0]["views"]
 
     except Exception as e:
         m.edit(
-            "❌ Cannot find song use another keywords"
+            "✖𝐜𝐚𝐧𝐧𝐨𝐭 𝐟𝐢𝐧𝐝 𝐬𝐨𝐧𝐠✖ **𝐮𝐬𝐞 𝐚𝐧𝐨𝐭𝐡𝐞𝐫 𝐤𝐞𝐲𝐰𝐨𝐫𝐝**"
         )
         print(str(e))
         return
-    m.edit("📥 Downloading...")
+    m.edit("📥 𝐝𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐢𝐧𝐠")
+    m.edit("▱▱▱▱▱▱")
+    m.edit("▰▱▱▱▱▱")
+    m.edit("▰▰▱▱▱▱")
+    m.edit("▰▰▰▱▱▱")
+    m.edit("▰▰▰▰▱▱")
+    m.edit("▰▰▰▰▰▱")
+    m.edit("▰▰▰▰▰▰")
+    m.edit("▢▢▢▢▢")
+    m.edit("▣▢▢▢▢")
+    m.edit("▣▣▢▢▢")
+    m.edit("▣▣▣▢▢")
+    m.edit("▣▣▣▣▢")
+    m.edit("▣▣▣▣▣")
+    m.edit("▢𝐒𝐞𝐧𝐝𝐢𝐧𝐠▢")
+    m.edit("▣𝐒𝐞𝐧𝐝𝐢𝐧𝐠▣")
+    m.edit("▢𝐒𝐞𝐧𝐝𝐢𝐧𝐠▢")
     try:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
         rep = (f"""
-🏷 **Title:** [{title}]({link})
-⏳ **Duration:** `{duration}`
-👀 **Views:** `{views}` 
-👤**Requested By**: {message.from_user.mention()}
-📤 **Uploaded By: [Ep SongBot](https://t.me/EpSongBot)**
+🏷 **𝚃𝚒𝚝𝚒𝚕𝚎:** ||[{title}]({link})||
+⏳ **𝙳𝚞𝚛𝚊𝚝𝚒𝚘𝚗:** ||{duration}||
+👀 **𝚅𝚒𝚎𝚠𝚜:** ||{views}|| 
+👤**𝚁𝚎𝚚𝚞𝚎𝚜𝚝𝚎𝚍 𝚋𝚢**: ||{message.from_user.mention()}||
+📤 **𝚄𝚙𝚕𝚘𝚊𝚍𝚎𝚍 𝚋𝚢: ||[𝑬𝒑 𝒔𝒐𝒏𝒈 𝒃𝒐𝒕](https://t.me/EpSongBot)||
         """)
         secmul, dur, dur_arr = 1, 0, duration.split(':')
         for i in range(len(dur_arr)-1, -1, -1):
