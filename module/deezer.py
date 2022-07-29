@@ -18,8 +18,7 @@ app = Client
 
 
 @app.on_message(filters.command("deezer"))
-async def link_handler(_, message):
-    link = message.matches[0].group(0)
+async def link_handler(app, message):
     try:
         items = await parse_deezer_url(link)
         item_type = items[0]
