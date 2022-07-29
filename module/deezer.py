@@ -16,11 +16,7 @@ from config import (
 client = Client
 
 
-@client.on_message(
-    filters.regex(r"https?://.*deezer[^\s]+") & filters.private
-    | filters.regex(r"https?://.*deezer[^\s]+")
-    & filters.command("deezer"))
-
+@client.on_message(filters.command("deezer"))
 async def link_handler(_, message):
     link = message.matches[0].group(0)
     try:
