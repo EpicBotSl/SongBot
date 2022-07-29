@@ -13,10 +13,10 @@ from config import (
     thumb_down,
 )
 
-client = Client
+app = Client
 
 
-@client.on_message(filters.command("deezer"))
+@app.on_message(filters.command("deezer"))
 async def link_handler(_, message):
     link = message.matches[0].group(0)
     try:
