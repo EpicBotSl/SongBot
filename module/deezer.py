@@ -56,7 +56,7 @@ async def link_handler(app, message):
         else:
             await m.edit_text("Link Type Not Available for Download.")
     except Exception as e:
-        await m.edit_text(f"Error: {e}", quote=True)
+            await m.edit_text(f"Error: {e}", quote=True)
 
 
 print("natural hehe 🍎he")
