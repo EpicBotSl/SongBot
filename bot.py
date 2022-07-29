@@ -32,6 +32,20 @@ from pyrogram import filters
 import requests
 from bs4 import BeautifulSoup
 
+
+from os import mkdir
+from random import randint
+
+from deezer import Client
+
+from config import (
+    download_songs,
+    fetch_tracks,
+    parse_deezer_url,
+    thumb_down,
+)
+
+
 bot = Client(
     "EpSong Bot",
     bot_token= BOT_TOKEN,
@@ -187,66 +201,48 @@ async def inline(client: Client, query: InlineQuery):
 #---------------------------Song Bot Epic-------------------------------------#
 #-------------------Epic-------------------------------------#
 
-ARQ_API_URL = "https://grambuilders.tech"
-ARQ_API_KEY = "JRBVAR-JICHKN-DFLDNX-NPRGCH-ARQ"
-
-aiohttpsession = ClientSession()
-
-ARQ = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
-
-
-def get_arg(message):
-    msg = message.text
-    msg = msg.replace(" ", "", 1) if msg[1] == " " else msg
-    split = msg[1:].replace("\n", " \n").split(" ")
-    if " ".join(split[1:]).strip() == "":
-        return ""
-    return " ".join(split[1:])
-
-
-
-async def fetch(url):
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as resp:
-            try:
-                data = await resp.json()
-            except:
-                data = await resp.text()
-    return data
-
-async def download_song(url):
-    song_name = f"Chabee.mp3"
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as resp:
-            if resp.status == 200:
-                f = await aiofiles.open(song_name, mode="wb")
-                await f.write(await resp.read())
-                await f.close()
-    return song_name
-
 
 @bot.on_message(filters.command("deezer"))
-async def deezer(_, message):
-    if len(message.command) < 2:
-        await message.reply_text("Download Now Deezer")
-        return
-    text = message.text.split(None, 1)[1]
-    query = text.replace(" ", "%20")
-    m = await message.reply_text("Searching...")
+async def link_handler(_, message):
+    link = message.matches[0].group(0)
     try:
-        r = await fetch(f"{ARQ}deezer?query={query}&count=1")
-        title = r[0]["title"]
-        url = r[0]["url"]
-        artist = r[0]["artist"]
+        items = await parse_deezer_url(link)
+        item_type = items[0]
+        item_id = items[1]
+        m = await message.reply_text("Gathering information... Please Wait.")
+        songs = await fetch_tracks(client, item_type, item_id)
+        if item_type in ["playlist", "album", "track"]:
+            randomdir = f"/tmp/{str(randint(1,100000000))}"
+            mkdir(randomdir)
+            for song in songs:
+                PForCopy = await message.reply_photo(
+                    song.get("cover"),
+                    caption=f"🎧 Title : `{song['name']}`\n🎤 Artist : `{song['artist']}`\n💽 Album : `{song['album']}`\n💽 Song Number : `{song['playlist_num']}`",
+                )
+                path = await download_songs(song, randomdir)
+                thumbnail = await thumb_down(
+                    song.get("thumb"), song.get("name")
+                )
+                AForCopy = await message.reply_audio(
+                    path,
+                    performer=song.get("artist"),
+                    title=f"{song.get('name')} - {song.get('artist')}",
+                    caption=f"[{song['name']}](https://www.deezer.com/track/{song['deezer_id']}) | {song['album']} - {song['artist']}",
+                    thumb=thumbnail,
+                    duration=song["duration"],
+                )
+                if -1001620454933:
+                    await PForCopy.copy(-1001620454933)
+                    await AForCopy.copy(-1001620454933)
+            await m.delete()
+        elif item_type == "artist":
+            await m.edit_text(
+                "This Is An Artist Account Link. Send me Track, Playlist or Album Link :)"
+            )
+        else:
+            await m.edit_text("Link Type Not Available for Download.")
     except Exception as e:
-        await m.edit(str(e))
-        return
-    await m.edit("Downloading...")
-    song = await download_song(url)
-    await m.edit("Uploading...")
-    await message.reply_audio(audio=song, title=title, performer=artist)
-    os.remove(song)
-    await m.delete()
+        await m.edit_text(f"Error: {e}", quote=True)
 
 
 
