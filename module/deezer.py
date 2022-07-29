@@ -2,7 +2,7 @@ from os import mkdir
 from random import randint
 
 from deezer import Client
-from pyrogram import filters
+from pyrogram import Client, filters
 from config import *
 from config import LOG_GROUP
 
@@ -15,6 +15,7 @@ from config import (
 )
 
 client = Client()
+app = Client
 
 
 @app.on_message(
