@@ -11,6 +11,8 @@ from pyrogram import filters, Client
 from youtube_search import YoutubeSearch
 from pyrogram import errors
 from pyrogram.types import InlineQuery, InlineQueryResultArticle, InputTextMessageContent
+from aiohttp import ClientSession
+from Python_ARQ import ARQ
 
 from youtubesearchpython import VideosSearch
 import re
@@ -185,6 +187,14 @@ async def inline(client: Client, query: InlineQuery):
 #---------------------------Song Bot Epic-------------------------------------#
 #-------------------Epic-------------------------------------#
 
+ARQ_API_URL = "https://grambuilders.tech"
+ARQ_API_KEY = "JRBVAR-JICHKN-DFLDNX-NPRGCH-ARQ"
+
+aiohttpsession = ClientSession()
+
+ARQ = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
+
+
 def get_arg(message):
     msg = message.text
     msg = msg.replace(" ", "", 1) if msg[1] == " " else msg
@@ -193,8 +203,6 @@ def get_arg(message):
         return ""
     return " ".join(split[1:])
 
-
-ARQ = "https://thearq.tech/"
 
 
 async def fetch(url):
