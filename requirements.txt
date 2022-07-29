@@ -67,3 +67,4 @@ yt_dlp
 beautifulsoup4==4.8.0
 urllib3==1.25.3
 deezer-python
+asgiref
