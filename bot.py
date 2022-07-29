@@ -21,6 +21,10 @@ import string
 
 import lyricsgenius as lg
 from pyrogram.types import Message
+import os
+import aiofiles
+import aiohttp
+from pyrogram import filters
 
 
 import requests
@@ -180,14 +184,10 @@ async def inline(client: Client, query: InlineQuery):
 
 #---------------------------Song Bot Epic-------------------------------------#
 #-------------------Epic-------------------------------------#
-import os
-import aiofiles
-import aiohttp
-from pyrogram import filters
+
 
 ARQ = "https://thearq.tech/"
 
-CHABEE = Client
 
 async def fetch(url):
     async with aiohttp.ClientSession() as session:
@@ -209,7 +209,7 @@ async def download_song(url):
     return song_name
 
 
-@CHABEE.on_message(filters.command("deezer"))
+@bot.on_message(filters.command("deezer"))
 async def deezer(_, message):
     if len(message.command) < 2:
         await message.reply_text("Download Now Deezer")
@@ -245,5 +245,3 @@ print (f"""
 #──────────────────╚╝""")
 
 bot.run()
-
-CHABEE.run()
