@@ -6,7 +6,6 @@ from pyrogram import Client, filters
 from config import *
 from config import LOG_GROUP
 
-from bot import app
 from config import (
     download_songs,
     fetch_tracks,
@@ -14,11 +13,10 @@ from config import (
     thumb_down,
 )
 
-client = Client()
-app = Client
+client = Client
 
 
-@app.on_message(
+@client.on_message(
     filters.regex(r"https?://.*deezer[^\s]+") & filters.private
     | filters.regex(r"https?://.*deezer[^\s]+")
     & filters.command("deezer"))
