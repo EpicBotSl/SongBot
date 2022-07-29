@@ -22,10 +22,6 @@ import string
 import lyricsgenius as lg
 from pyrogram.types import Message
 
-from config import BANNED_USERS, lyrical
-from strings import get_command
-from LogiMusic import app
-from LogiMusic.utils.decorators.language import language
 
 import requests
 from bs4 import BeautifulSoup
@@ -37,7 +33,6 @@ bot = Client(
     api_hash= API_HASH,
 )
 
-lyrical = {}
 #---------------------------Song Bot Epic-------------------------------------#
 #-----------Song Section Epic-------------------------------------#
 
@@ -194,6 +189,8 @@ y = lg.Genius(
 )
 y.verbose = False
 
+
+lyrical = {}
 
 @bot.on_message(filters.command(lyric))
 async def lrsearch(client, message: Message, _):
