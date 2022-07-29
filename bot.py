@@ -192,6 +192,8 @@ y.verbose = False
 
 lyrical = {}
 
+lyric = lyric
+
 @bot.on_message(filters.command(lyric))
 async def lrsearch(client, message: Message, _):
     if len(message.command) < 2:
