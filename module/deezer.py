@@ -5,6 +5,7 @@ from deezer import Client
 from pyrogram import Client, filters
 from config import *
 from config import LOG_GROUP
+from pyrogram.errors import *
 
 from config import (
     download_songs,
@@ -59,4 +60,4 @@ async def link_handler(_, message):
         await m.edit_text(f"Error: {e}", quote=True)
 
 
-print("natural hehe 🍎")
+print("natural hehe 🍎he")
