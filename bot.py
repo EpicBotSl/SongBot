@@ -125,25 +125,6 @@ def song(client, message):
     except Exception as e:
         print(e)
 
-if __name__ == "__main__":
-    print("⌛Updating & Analyzing bot⏳")
-    try:
-        app.start()
-    except (ApiIdInvalid, ApiIdPublishedFlood):
-        raise Exception("Your API_ID/API_HASH is not valid.")
-    except AccessTokenInvalid:
-        raise Exception("Your BOT_TOKEN is not valid.")
-    uname = app.get_me().username
-    print(f"""@{uname} is Accepted
-╔════╗────────╔═══╗
-║╔╗╔╗║────────║╔══╝
-╚╝║║╠╩═╦══╦╗╔╗║╚══╦══╦╦══╗
-──║║║║═╣╔╗║╚╝║║╔══╣╔╗╠╣╔═╝
-──║║║║═╣╔╗║║║║║╚══╣╚╝║║╚═╗
-──╚╝╚══╩╝╚╩╩╩╝╚═══╣╔═╩╩══╝
-──────────────────║║
-──────────────────╚╝
-Join For update @EpicBotsSl""")
-    idle()
-    app.stop()
-    print("Bot stopped. Alvida!")
+
+print("pcde balanne")
+app.start()
