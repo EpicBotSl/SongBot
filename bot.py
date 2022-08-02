@@ -127,4 +127,5 @@ def song(client, message):
 
 
 print("pcde balanne")
-app.start()
+
+app.run()
