@@ -30,9 +30,7 @@ app = Client(
     "Epic Developers",
     api_id=API_ID,
     api_hash=API_HASH,
-    bot_token=BOT_TOKEN,
-    in_memory=True,
-    plugins=dict(root="module"),
+    bot_token=BOT_TOKEN
 )
 
 
