@@ -121,12 +121,22 @@ print(f"""
 #──────────────────║║
 #──────────────────╚╝""")
 
+def get_text(message: Message) -> [None, str]:
+    text_to_return = message.text
+    if message.text is None:
+        return None
+    if " " not in text_to_return:
+        return None
+    try:
+        return message.text.split(None, 1)[1]
+    except IndexError:
+        return None
 
 @bot.on_message(filters.command(["vsong", "video"]))
 async def vsong(client, message: Message):
     urlissed = get_text(message)
 
-    pablo = await bot.send_message(message.chat.id, f"**🔎 Mencari** `{urlissed}`")
+    pablo = await bot.send_message(message.chat.id, f"**🔎 searching** `{urlissed}`")
     if not urlissed:
         await pablo.edit(
             "Sintaks Perintah Tidak Valid, Silakan Periksa Menu Bantuan Untuk Tahu Lebih Banyak!"
