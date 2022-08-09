@@ -8,7 +8,7 @@ from pyrogram.types import *
 from pyrogram.types import Message
 from pyrogram import *
 from youtube_search import YoutubeSearch
-
+from youtubesearchpython import SearchVideos
 
 bot = Client(
     "Epic Developers",
@@ -121,16 +121,82 @@ print(f"""
 #──────────────────║║
 #──────────────────╚╝""")
 
-def get_text(message: Message) -> [None, str]:
-    text_to_return = message.text
-    if message.text is None:
-        return None
-    if " " not in text_to_return:
-        return None
-    try:
-        return message.text.split(None, 1)[1]
-    except IndexError:
-        return None
+def get_user(message: Message, text: str) -> [int, str, None]:
+    asplit = None if text is None else text.split(" ", 1)
+    user_s = None
+    reason_ = None
+    if message.reply_to_message:
+        user_s = message.reply_to_message.from_user.id
+        reason_ = text or None
+    elif asplit is None:
+        return None, None
+    elif len(asplit[0]) > 0:
+        user_s = int(asplit[0]) if asplit[0].isdigit() else asplit[0]
+        if len(asplit) == 2:
+            reason_ = asplit[1]
+    return user_s, reason_
+
+
+def get_readable_time(seconds: int) -> int:
+    count = 0
+    ping_time = ""
+    time_list = []
+    time_suffix_list = ["s", "m", "h", "days"]
+    while count < 4:
+        count += 1
+        remainder, result = divmod(seconds, 60) if count < 3 else divmod(seconds, 24)
+        if seconds == 0 and remainder == 0:
+            break
+        time_list.append(int(result))
+        seconds = int(remainder)
+    for x in range(len(time_list)):
+        time_list[x] = str(time_list[x]) + time_suffix_list[x]
+    if len(time_list) == 4:
+        ping_time += time_list.pop() + ", "
+    time_list.reverse()
+    ping_time += ":".join(time_list)
+    return ping_time
+
+
+def time_formatter(milliseconds: int) -> str:
+    seconds, milliseconds = divmod(int(milliseconds), 1000)
+    minutes, seconds = divmod(seconds, 60)
+    hours, minutes = divmod(minutes, 60)
+    days, hours = divmod(hours, 24)
+    tmp = (
+        ((str(days) + " day(s), ") if days else "")
+        + ((str(hours) + " hour(s), ") if hours else "")
+        + ((str(minutes) + " minute(s), ") if minutes else "")
+        + ((str(seconds) + " second(s), ") if seconds else "")
+        + ((str(milliseconds) + " millisecond(s), ") if milliseconds else "")
+    )
+    return tmp[:-2]
+
+
+def get_file_extension_from_url(url):
+    url_path = urlparse(url).path
+    basename = os.path.basename(url_path)
+    return basename.split(".")[-1]
+
+
+# Funtion To Download Song
+async def download_song(url):
+    song_name = f"{randint(6969, 6999)}.mp3"
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as resp:
+            if resp.status == 200:
+                f = await aiofiles.open(song_name, mode="wb")
+                await f.write(await resp.read())
+                await f.close()
+    return song_name
+
+
+is_downloading = False
+
+
+def time_to_seconds(time):
+    stringt = str(time)
+    return sum(int(x) * 60 ** i for i, x in enumerate(reversed(stringt.split(":"))))
 
 @bot.on_message(filters.command(["vsong", "video"]))
 async def vsong(client, message: Message):
@@ -139,7 +205,7 @@ async def vsong(client, message: Message):
     pablo = await bot.send_message(message.chat.id, f"**🔎 searching** `{urlissed}`")
     if not urlissed:
         await pablo.edit(
-            "Sintaks Perintah Tidak Valid, Silakan Periksa Menu Bantuan Untuk Tahu Lebih Banyak!"
+            "Give me Name to search "
         )
         return
 
