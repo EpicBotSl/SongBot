@@ -42,7 +42,7 @@ def song(client, message):
         thumb = requests.get(thumbnail, allow_redirects=True)
         open(thumb_name, 'wb').write(thumb.content)
         
-        performer = f"〢ᴇᴘɪᴄ ᴅᴇᴠᴇʟᴏᴘᴇʀꜱ〣"  
+        performer = f"Unknown Artist"  
         duration = results[0]["duration"]
         url_suffix = results[0]["url_suffix"]
         views = results[0]["views"]
@@ -76,6 +76,16 @@ def song(client, message):
     m.edit("⬤𝕤𝕖𝕟𝕕𝕚𝕟𝕘⬤")
     m.edit("⬤⬤𝕤𝕖𝕟𝕕𝕚𝕟𝕘⬤⬤")
     m.edit("⬤⬤⬤𝕤𝕖𝕟𝕕𝕚𝕟𝕘⬤⬤⬤")
+    m.edit(f"""
+╭━┳━╭━╭━╮╮
+┃┈┈┈┣▅╋▅┫┃
+┃┈┃┈╰━╰━━━━━━╮
+╰┳╯┈┈┈┈┈┈┈┈┈◢▉◣
+╲┃┈┈┈┈┈┈┈┈┈▉▉▉
+╲┃┈┈┈┈┈┈┈┈┈◥▉◤
+╲┃┈┈┈┈╭━┳━━━━╯
+╲┣━━━━━━┫﻿
+""")
     try:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
