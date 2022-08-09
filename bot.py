@@ -22,6 +22,17 @@ def time_to_seconds(time):
     stringt = str(time)
     return sum(int(x) * 60 ** i for i, x in enumerate(reversed(stringt.split(':'))))
 
+def get_text(message: Message) -> [None, str]:
+    text_to_return = message.text
+    if message.text is None:
+        return None
+    if " " not in text_to_return:
+        return None
+    try:
+        return message.text.split(None, 1)[1]
+    except IndexError:
+        return None
+
 @bot.on_message(filters.command('song') & ~filters.forwarded)
 def song(client, message):
 
