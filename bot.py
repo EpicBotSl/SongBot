@@ -4,6 +4,9 @@ from config import *
 import requests
 import yt_dlp as youtube_dl
 from pyrogram import filters, Client
+from pyrogram.types import *
+from pyrogram.types import Message
+from pyrogram import *
 from youtube_search import YoutubeSearch
 
 
