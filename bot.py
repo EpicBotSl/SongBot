@@ -53,18 +53,29 @@ def song(client, message):
         )
         print(str(e))
         return
-    m.edit("📥 Downloading...")
+    m.edit("⎆ ⓓⓞⓦⓝⓛⓞⓐⓓⓘⓝⓖ")
+    m.edit("⦿⦾⦾⦾")
+    m.edit("⦿⦿⦾⦾")
+    m.edit("⦿⦿⦿⦾")
+    m.edit("⦿⦿⦿⦿")
+    m.edit("⦿⦿⦿⦿")
+    m.edit("⦾⦾⦾⦾")
+    m.edit("⦿⦿⦿⦿")
+    m.edit("⦾⦾⦾⦾")
+    m.edit("⦿⦿⦿⦿")
+    m.edit("⦾⦾⦾⦾")
+    m.edit("⬤⬤⬤𝕤𝕖𝕟𝕕𝕚𝕟𝕘⬤⬤⬤")
     try:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
         rep = (f"""
-🏷 **Title:** [{title}]({link})
-⏳ **Duration:** `{duration}`
-👀 **Views:** `{views}` 
-👤**Requested By**: ||{message.from_user.mention()}||
-📤 **Uploaded By: [❦Ep Song Bot❦](https://t.me/ItsMeSithija)**
+💽 **𝚃𝚒𝚝𝚕𝚎 :** [__{title}__]({link})
+⏳ **𝙳𝚞𝚛𝚊𝚝𝚒𝚘𝚗 :** __{duration}__
+🎵 **V𝚒𝚎𝚠𝚜 :** **{views}** 
+☆ **𝚁𝚎𝚚𝚞𝚎𝚜𝚝𝚎𝚍 𝚋𝚢 :** ||{message.from_user.mention()}||
+👻 **𝚄𝚙𝚕𝚘𝚊𝚍𝚎𝚍 𝚋𝚢 :** ||[Ɇ₱ ₴Ø₦₲ ฿Ø₮](https://t.me/EpSongBot)||
         """)
         secmul, dur, dur_arr = 1, 0, duration.split(':')
         for i in range(len(dur_arr)-1, -1, -1):
