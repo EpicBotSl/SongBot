@@ -228,7 +228,6 @@ async def vsong(client, message: Message):
     fridayz = mio[0]["id"]
     mio[0]["channel"]
     kekme = f"https://img.youtube.com/vi/{fridayz}/hqdefault.jpg"
-    await asyncio.sleep(0.6)
     url = mo
     sedlyf = wget.download(kekme)
     opts = {
