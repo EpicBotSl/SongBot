@@ -1,5 +1,6 @@
 import os
 from pyrogram import idle, filters
+from config import *
 import requests
 import yt_dlp as youtube_dl
 from pyrogram import filters, Client
