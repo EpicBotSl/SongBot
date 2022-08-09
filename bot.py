@@ -1,32 +1,13 @@
-import config 
-from config import *
-from script import *
-import logging
-from pyrogram import Client, idle
-from pyromod import listen  # type: ignore
-from pyrogram.errors import ApiIdInvalid, ApiIdPublishedFlood, AccessTokenInvalid
-
 import os
+from bot import bot
 from pyrogram import idle, filters
 import requests
-from config import *
-from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from pyrogram import *
-from pyrogram.types import *
 import yt_dlp as youtube_dl
 from pyrogram import filters, Client
 from youtube_search import YoutubeSearch
-from pyrogram import errors
-from pyrogram.types import InlineQuery, InlineQueryResultArticle, InputTextMessageContent
-from aiohttp import ClientSession
-from Python_ARQ import ARQ
 
-logging.basicConfig(
-    level=logging.WARNING, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
 
-app = Client(
+bot = Client(
     "Epic Developers",
     api_id=API_ID,
     api_hash=API_HASH,
@@ -34,12 +15,11 @@ app = Client(
 )
 
 
-
 def time_to_seconds(time):
     stringt = str(time)
     return sum(int(x) * 60 ** i for i, x in enumerate(reversed(stringt.split(':'))))
 
-@app.on_message(filters.command('song'))
+@bot.on_message(filters.command('song') & ~filters.forwarded)
 def song(client, message):
 
     user_id = message.from_user.id 
@@ -50,7 +30,7 @@ def song(client, message):
     for i in message.command[1:]:
         query += ' ' + str(i)
     print(query)
-    m = message.reply("🔎 𝐬𝐞𝐚𝐫𝐜𝐡𝐢𝐧𝐠...")
+    m = message.reply("🔎 Searching...")
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
@@ -62,50 +42,29 @@ def song(client, message):
         thumb = requests.get(thumbnail, allow_redirects=True)
         open(thumb_name, 'wb').write(thumb.content)
         
-        performer = f"𝙴𝚙 𝚜𝚘𝚗𝚐 𝚋𝚘𝚝"  
+        performer = f"〢ᴇᴘɪᴄ ᴅᴇᴠᴇʟᴏᴘᴇʀꜱ〣"  
         duration = results[0]["duration"]
         url_suffix = results[0]["url_suffix"]
         views = results[0]["views"]
 
     except Exception as e:
         m.edit(
-            "✖𝐜𝐚𝐧𝐧𝐨𝐭 𝐟𝐢𝐧𝐝 𝐬𝐨𝐧𝐠✖ **𝐮𝐬𝐞 𝐚𝐧𝐨𝐭𝐡𝐞𝐫 𝐤𝐞𝐲𝐰𝐨𝐫𝐝**"
+            "❌ Cannot find song use another keywords"
         )
         print(str(e))
         return
-    m.edit("📥 𝐝𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐢𝐧𝐠")
-    m.edit("▱▱▱▱▱▱")
-    m.edit("▰▱▱▱▱▱")
-    m.edit("▰▰▱▱▱▱")
-    m.edit("▰▰▰▱▱▱")
-    m.edit("▰▰▰▰▱▱")
-    m.edit("▰▰▰▰▰▱")
-    m.edit("▰▰▰▰▰▰")
-    m.edit("▢𝐒𝐞𝐧𝐝𝐢𝐧𝐠▢")
-    m.edit("▣𝐒𝐞𝐧𝐝𝐢𝐧𝐠▣")
-    m.edit("▢𝐒𝐞𝐧𝐝𝐢𝐧𝐠▢")
-    m.edit("▣𝐒𝐞𝐧𝐝𝐢𝐧𝐠▣")
-    m.edit("▢𝐒𝐞𝐧𝐝𝐢𝐧𝐠▢")
-    m.edit("▣𝐒𝐞𝐧𝐝𝐢𝐧𝐠▣")
-    m.edit("▢𝐒𝐞𝐧𝐝𝐢𝐧𝐠▢")
-    m.edit("▣𝐒𝐞𝐧𝐝𝐢𝐧𝐠▣")
-    m.edit("▢𝐒𝐞𝐧𝐝𝐢𝐧𝐠▢")
-    m.edit("▣𝐒𝐞𝐧𝐝𝐢𝐧𝐠▣")
-    m.edit("▢𝐒𝐞𝐧𝐝𝐢𝐧𝐠▢")
-    m.edit("▣𝐒𝐞𝐧𝐝𝐢𝐧𝐠▣")
-    m.edit("▢𝐒𝐞𝐧𝐝𝐢𝐧𝐠▢")
- 
+    m.edit("📥 Downloading...")
     try:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
         rep = (f"""
-🏷 **𝚃𝚒𝚝𝚒𝚕𝚎:** ||[{title}]({link})||
-⏳ **𝙳𝚞𝚛𝚊𝚝𝚒𝚘𝚗:** ||{duration}||
-👀 **𝚅𝚒𝚎𝚠𝚜:** ||{views}|| 
-👤**𝚁𝚎𝚚𝚞𝚎𝚜𝚝𝚎𝚍 𝚋𝚢**: ||{message.from_user.mention()}||
-📤 **𝚄𝚙𝚕𝚘𝚊𝚍𝚎𝚍 𝚋𝚢: ||[𝑬𝒑 𝒔𝒐𝒏𝒈 𝒃𝒐𝒕](https://t.me/EpSongBot)||
+🏷 **Title:** [{title}]({link})
+⏳ **Duration:** `{duration}`
+👀 **Views:** `{views}` 
+👤**Requested By**: ||{message.from_user.mention()}||
+📤 **Uploaded By: [❦Ep Song Bot❦](https://t.me/ItsMeSithija)**
         """)
         secmul, dur, dur_arr = 1, 0, duration.split(':')
         for i in range(len(dur_arr)-1, -1, -1):
@@ -123,7 +82,14 @@ def song(client, message):
     except Exception as e:
         print(e)
 
+print(f"""
+#╔════╗────────╔═══╗
+#║╔╗╔╗║────────║╔══╝
+#╚╝║║╠╩═╦══╦╗╔╗║╚══╦══╦╦══╗
+#──║║║║═╣╔╗║╚╝║║╔══╣╔╗╠╣╔═╝
+#──║║║║═╣╔╗║║║║║╚══╣╚╝║║╚═╗
+#──╚╝╚══╩╝╚╩╩╩╝╚═══╣╔═╩╩══╝
+#──────────────────║║
+#──────────────────╚╝""")
 
-print("pcde balanne")
-
-app.run()
+bot.run()
