@@ -10,6 +10,13 @@ from pyrogram.types import Message
 from pyrogram import *
 from youtube_search import YoutubeSearch
 from youtubesearchpython import SearchVideos
+import asyncio
+import math
+import time
+
+import aiofiles
+import aiohttp
+import wget
 
 bot = Client(
     "Epic Developers",
