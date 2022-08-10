@@ -340,7 +340,6 @@ async def youtube_cb(b, cb):
     await cb.message.edit("▰▰▰▱▱▱")
     await cb.message.edit("▰▰▰▰▱▱")
     await cb.message.edit("▰▰▰▰▰▱")
-    await cb.message.edit("▰▰▰▰▰▱")
     await cb.message.edit("▰▰▰▰▰▰")
 
     x = int(x)
