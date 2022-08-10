@@ -265,71 +265,6 @@ def time_to_seconds(time):
     stringt = str(time)
     return sum(int(x) * 60 ** i for i, x in enumerate(reversed(stringt.split(":"))))
 
-@bot.on_message(filters.command(["vsong", "video"]))
-async def vsong(client, message: Message):
-    urlissed = get_text(message)
-
-    pablo = await bot.send_message(message.chat.id, f"**🔎 searching** `{urlissed}`")
-    if not urlissed:
-        await pablo.edit(
-            "Give me Name to search "
-        )
-        return
-
-    search = SearchVideos(f"{urlissed}", offset=1, mode="dict", max_results=1)
-    mi = search.result()
-    mio = mi["search_result"]
-    mo = mio[0]["link"]
-    thum = mio[0]["title"]
-    fridayz = mio[0]["id"]
-    mio[0]["channel"]
-    kekme = f"https://img.youtube.com/vi/{fridayz}/hqdefault.jpg"
-    url = mo
-    sedlyf = wget.download(kekme)
-    opts = {
-        "format": "best",
-        "addmetadata": True,
-        "key": "FFmpegMetadata",
-        "prefer_ffmpeg": True,
-        "geo_bypass": True,
-        "nocheckcertificate": True,
-        "postprocessors": [{"key": "FFmpegVideoConvertor", "preferedformat": "mp4"}],
-        "outtmpl": "%(id)s.mp4",
-        "logtostderr": False,
-        "quiet": True,
-    }
-    try:
-        with YoutubeDL(opts) as ytdl:
-            ytdl_data = ytdl.extract_info(url, download=True)
-    except Exception as e:
-        await event.edit(event, f"**Gagal Mengunduh** \n**Kesalahan :** `{str(e)}`")
-        return
-    c_time = time.time()
-    file_stark = f"{ytdl_data['id']}.mp4"
-    capy = f"""
-**🏷️ Nama Video:** [{thum}]({mo})
-**🎧 Permintaan Dari:** {message.from_user.mention}
-"""
-    await client.send_video(
-        message.chat.id,
-        video=open(file_stark, "rb"),
-        duration=int(ytdl_data["duration"]),
-        file_name=str(ytdl_data["title"]),
-        thumb=sedlyf,
-        caption=capy,
-        supports_streaming=True,
-        progress=progress,
-        progress_args=(
-            pablo,
-            c_time,
-            f"**📥 Download** `{urlissed}`",
-            file_stark,
-        ),
-    )
-    await pablo.delete()
-    for files in (sedlyf, file_stark):
-        if files and os.path.exists(files):
-            os.remove(files)
 
 #---------------------------Gen Logo Epic-------------------------------------#
 #---------------------------Gen Logo Epic-------------------------------------#
@@ -342,36 +277,36 @@ async def ytsearch(client, message):
             return
         user_id = message.from_user.id
         query = " ".join(message.command[1:])
-        msg = await message.reply("`searching...`")
+        msg = await message.reply("searching...")
         results = YoutubeSearch(query, max_results=5).to_dict()
         try:
-            toxxt = "**Select the song you want to download**\n\n"
-            emojilist = ["1⃣", "2⃣", "3⃣", "4⃣", "5⃣"]
+            toxxt = "**❣𝚂𝚎𝚕𝚎𝚌𝚝 𝚃𝚑𝚎 𝚜𝚘𝚗𝚐 𝚈𝚘𝚞 𝚠𝚊𝚗𝚝 𝚃𝚘 𝙳𝚘𝚠𝚗𝚕𝚘𝚊𝚍❣**\n\n"
+            emojilist = ["❰❶❱", "❰❷❱", "❰❸❱", "❰❹❱", "❰❺❱"]
             for j in range(5):
-                toxxt += f"{emojilist[j]} <b>Title - [{results[j]['title']}](https://youtube.com{results[j]['url_suffix']})</b>\n"
-                toxxt += f" ╚ <b>Duration</b> - {results[j]['duration']}\n"
-                toxxt += f" ╚ <b>Views</b> - {results[j]['views']}\n"
-                toxxt += f" ╚ <b>Channel</b> - {results[j]['channel']}\n\n"
+                toxxt += f"{emojilist[j]} <b>ᴛɪᴛʟᴇ - [{results[j]['title']}](https://youtube.com{results[j]['url_suffix']})</b>\n"
+                toxxt += f" 🕒 ╚ <b>ᴅᴜʀᴀᴛɪᴏɴ</b> - {results[j]['duration']}\n"
+                toxxt += f" 👻 ╚ <b>ᴠɪᴇᴡꜱ</b> - {results[j]['views']}\n"
+                toxxt += f" 📛 ╚ <b>ᴄʜᴀɴɴᴇʟ</b> - {results[j]['channel']}\n\n"
 
             koyboard = InlineKeyboardMarkup(
                 [
                     [
                         InlineKeyboardButton(
-                            "1️⃣", callback_data=f"plll 0|{query}|{user_id}"
+                            "❰ ❶ ❱", callback_data=f"plll 0|{query}|{user_id}"
                         ),
                         InlineKeyboardButton(
-                            "2️⃣", callback_data=f"plll 1|{query}|{user_id}"
+                            "❰ ❷ ❱", callback_data=f"plll 1|{query}|{user_id}"
                         ),
                         InlineKeyboardButton(
-                            "3️⃣", callback_data=f"plll 2|{query}|{user_id}"
+                            "❰ ❸ ❱", callback_data=f"plll 2|{query}|{user_id}"
                         ),
                     ],
                     [
                         InlineKeyboardButton(
-                            "4️⃣", callback_data=f"plll 3|{query}|{user_id}"
+                            "❰ ❹ ❱", callback_data=f"plll 3|{query}|{user_id}"
                         ),
                         InlineKeyboardButton(
-                            "5️⃣", callback_data=f"plll 4|{query}|{user_id}"
+                            "❰ ❺ ❱", callback_data=f"plll 4|{query}|{user_id}"
                         ),
                     ],
                     [InlineKeyboardButton(text="Close", callback_data="close")],
@@ -415,7 +350,7 @@ async def youtube_cb(b, cb):
         info_dict = ydl.extract_info(url, download=False)
         audio_file = ydl.prepare_filename(info_dict)
         ydl.process_info(info_dict)
-    await cb.message.edit("`Uploading to telegram server...`")
+    await cb.message.edit("Uploading to telegram server...")
     await cb.message.reply_audio(
         audio_file,
         thumb=preview,
