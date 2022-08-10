@@ -353,6 +353,7 @@ async def youtube_cb(b, cb):
     url_suffix = results[0]["url_suffix"]
     views = results[0]["views"]
     channel = results[0]["channel"]
+    link = f"https://youtube.com{results[0]['url_suffix']}"
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
         preview = wget.download(thumbnail)
@@ -368,12 +369,13 @@ async def youtube_cb(b, cb):
         thumb=preview,
         duration=int(info_dict["duration"]),
         caption=(f"""
-💽 **𝚃𝚒𝚝𝚕𝚎 :** __{title}__
-⏳ **𝙳𝚞𝚛𝚊𝚝𝚒𝚘𝚗 :** __{duration}__
-📛 **Channel :** __{channel}__
-🎵 **V𝚒𝚎𝚠𝚜 :** **{views}** 
-👻 **𝚄𝚙𝚕𝚘𝚊𝚍𝚎𝚍 𝚋𝚢 :** ||[Ɇ₱ ₴Ø₦₲ ฿Ø₮](https://t.me/EpSongBot)||
-        """)
+💽 𝙽𝚊𝚖𝚎 : __[{title}](link)__
+
+♪ 𝙰𝚛𝚝𝚒𝚜𝚝 : **{channel}**
+
+⏳ 𝙳𝚞𝚛𝚊𝚝𝚒𝚘𝚗 : {duration}
+
+💠 V𝚒𝚎𝚠𝚜 : --{views}--""")
     )
     try:
         os.remove(audio_file)
