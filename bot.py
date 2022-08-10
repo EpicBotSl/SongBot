@@ -352,6 +352,7 @@ async def youtube_cb(b, cb):
     duration = results[0]["duration"]
     url_suffix = results[0]["url_suffix"]
     views = results[0]["views"]
+    channel = results[0]["channel"]
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
         preview = wget.download(thumbnail)
@@ -369,8 +370,8 @@ async def youtube_cb(b, cb):
         caption=(f"""
 💽 **𝚃𝚒𝚝𝚕𝚎 :** __{title}__
 ⏳ **𝙳𝚞𝚛𝚊𝚝𝚒𝚘𝚗 :** __{duration}__
+📛 **Channel :** __{channel}__
 🎵 **V𝚒𝚎𝚠𝚜 :** **{views}** 
-☆ **𝚁𝚎𝚚𝚞𝚎𝚜𝚝𝚎𝚍 𝚋𝚢 :** ||{message.from_user.mention()}||
 👻 **𝚄𝚙𝚕𝚘𝚊𝚍𝚎𝚍 𝚋𝚢 :** ||[Ɇ₱ ₴Ø₦₲ ฿Ø₮](https://t.me/EpSongBot)||
         """)
     )
