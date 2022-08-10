@@ -12,6 +12,8 @@ from youtube_search import YoutubeSearch
 from youtubesearchpython import SearchVideos
 import asyncio
 import math
+from tswift import Song
+import io
 import time
 
 import aiofiles
@@ -395,35 +397,37 @@ async def close(b, cb):
 
 #▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅#
 
+@bot.on_message(filters.command(["lyric", "lyrics"]))
+async def _(client, message):
+    lel = await message.reply("Searching For Lyrics.....")
+    query = message.text
+    if not query:
+        await lel.edit("`What I am Supposed to find `")
+        return
 
-API = "https://apis.xditya.me/lyrics?song="
+    song = ""
+    song = Song.find_song(query)
+    if song:
+        if song.lyrics:
+            reply = song.format()
+        else:
+            reply = "Couldn't find any lyrics for that song! try with artist name along with song if still doesnt work try `.glyrics`"
+    else:
+        reply = "lyrics not found! try with artist name along with song if still doesnt work try `.glyrics`"
 
-@bot.on_message(filters.text & filters.command(["lyrics"]))
-async def sng(bot, message):
-        if not message.reply_to_message:
-          await message.reply_text("Please reply to a message **Note** use %20 as space between words")
-        else:          
-          mee = await message.reply_text("`Searching 🔎 **Note** %20 as space between words `")
-          song = message.reply_to_message.text
-          chat_id = message.from_user.id
-          rpl = lyrics(song)
-          await mee.delete()
-          try:
-            await mee.delete()
-            await bot.send_message(chat_id, text = rpl, reply_to_message_id = message.message_id, reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇs ", url = f"t.me/Spotify_downloa")]]))
-          except Exception as e:                            
-             await message.reply_text(f"I Can't Find A Song With `{song}` **note **use %20 as space between words", quote = True, reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇs", url = f"t.me/spotify_downloa")]]))
-
-
-
-def search(song):
-        r = requests.get(API + song)
-        find = r.json()
-        return find
-       
-def lyrics(song):
-        fin = search(song)
-        text = f"""{lyrics}"""
-        return text
+    if len(reply) > 4095:
+        with io.BytesIO(str.encode(reply)) as out_file:
+            out_file.name = "lyrics.text"
+            await client.send_document(
+                message.chat.id,
+                out_file,
+                force_document=True,
+                allow_cache=False,
+                caption=query,
+                reply_to_msg_id=message.message_id,
+            )
+            await lel.delete()
+    else:
+        await lel.edit(reply)
 
 bot.run()
