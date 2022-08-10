@@ -89,7 +89,7 @@ def get_text(message: Message) -> [None, str]:
     except IndexError:
         return None
 
-@bot.on_message(filters.command('song') & ~filters.forwarded)
+@bot.on_message(filters.command('song') & ~filters.forwarded & filters.incoming)
 def song(client, message):
 
     user_id = message.from_user.id 
