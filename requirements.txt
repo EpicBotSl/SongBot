@@ -69,3 +69,4 @@ deezer-python
 asgiref
 youtube-search-python==1.4.6
 gTTS
+tswift
