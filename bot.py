@@ -423,7 +423,7 @@ def search(song):
        
 def lyrics(song):
         fin = search(song)
-        text = f'{fin["lyrics"]}'
+        text = f"""{lyrics}"""
         return text
 
 bot.run()
