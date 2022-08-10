@@ -269,7 +269,7 @@ def time_to_seconds(time):
 #---------------------------Gen Logo Epic-------------------------------------#
 #---------------------------Gen Logo Epic-------------------------------------#
 
-@bot.on_message(filters.command("search") & filters.text)
+@bot.on_message(filters.command("search") & (filters.text))
 async def ytsearch(client, message):
     try:
         if len(message.command) < 2:
