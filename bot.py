@@ -26,6 +26,7 @@ from asyncio import get_running_loop
 from functools import partial
 from io import BytesIO
 from urllib.parse import urlparse
+from arq import *
 
 import ffmpeg
 
