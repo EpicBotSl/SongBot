@@ -1,5 +1,5 @@
 from pyrogram import filters, types
-from pyrogram import Client
+from bot import bot
 from pyrogram import *
 from pyrogram.types import *
 import os
@@ -7,7 +7,6 @@ from shazamio import Shazam, exceptions, FactoryArtist, FactoryTrack
 
 shazam = Shazam()
 
-bot = Client
 
 max_file = 30641629
 
