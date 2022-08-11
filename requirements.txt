@@ -70,3 +70,6 @@ asgiref
 youtube-search-python==1.4.6
 gTTS
 tswift
+bs4
+python-arq
+ffmpeg-python
