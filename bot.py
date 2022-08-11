@@ -22,12 +22,12 @@ bot = Client(
 if __name__ == "__main__":
     print("⌛Updating & Analyzing bot⏳")
     try:
-        app.start()
+        bot.start()
     except (ApiIdInvalid, ApiIdPublishedFlood):
         raise Exception("Your API_ID/API_HASH is not valid.")
     except AccessTokenInvalid:
         raise Exception("Your BOT_TOKEN is not valid.")
-    uname = app.get_me().username
+    uname = bot.get_me().username
     print(f"""@{uname} is Accepted
 ╔════╗────────╔═══╗
 ║╔╗╔╗║────────║╔══╝
@@ -39,5 +39,5 @@ if __name__ == "__main__":
 ──────────────────╚╝
 Join For update @EpicBotsSl""")
     idle()
-    app.stop()
+    bot.stop()
     print("Bot stopped. Alvida!")
