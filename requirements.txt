@@ -74,3 +74,4 @@ bs4
 python-arq
 ffmpeg-python
 lyricsgenius
+shazamio==0.0.2
