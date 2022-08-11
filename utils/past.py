@@ -1,4 +1,4 @@
-from utils.http import post
+from .http import post
 
 BASE = "https://batbin.me/"
 
