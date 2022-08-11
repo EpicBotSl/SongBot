@@ -103,7 +103,7 @@ def song(client, message):
         query += ' ' + str(i)
     print(query)
     m = message.reply("🔎 Searching...")
-    ydl_opts = {"format": "bestaudio[ext=mp3]"}
+    ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
         link = f"https://youtube.com{results[0]['url_suffix']}"
@@ -397,32 +397,5 @@ async def close(b, cb):
 
 #▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅#
 
-API = "https://apis.xditya.me/lyrics?song="
-
-@bot.on_message(filters.private & filters.text)
-async def sng(bot, message):
-        hy = await message.reply_text("`Searching 🔎`")
-        song = message.text
-        chat_id = message.from_user.id
-        rpl = lyrics(song)
-        await hy.delete()
-        try:
-                await hy.delete()
-                await bot.send_message(chat_id, text = rpl, reply_to_message_id = message.message_id, reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Dev 🔗 ", url = f"github.com/M-fazin")], [InlineKeyboardButton("🧑‍💻 Channel", url = "https://telegram.me/EKBOTZ_UPDATE"),InlineKeyboardButton("🗃️ Source Code", url = "https://github.com/M-fazin/Lyrics-Search-Bot")]]))
-        except Exception as e:
-        	await message.reply_text(f"I Can't Find A Song With `{song}`", quote = True, reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("🧑‍💻 Developer", url = f"github.com/M-fazin")], [InlineKeyboardButton("🧑‍💻 Channel", url = "https://telegram.me/EKBOTZ_UPDATE"),InlineKeyboardButton("🗃️ Source Code", url = "https://github.com/M-fazin/Lyrics-Search-Bot")]]))
-
-
-def search(song):
-        r = requests.get(API + song)
-        find = r.json()
-        return find
-       
-def lyrics(song):
-        fin = search(song)
-        text = f'**🎶 Successfully Extracted Lyrics Of {song} 🎶**\n\n\n\n'
-        text += f'`{fin["lyrics"]}`'
-        text += '\n\n\n**Made With ❤️ By @EKBOTZ_UPDATE**'
-        return text
 
 bot.run()
