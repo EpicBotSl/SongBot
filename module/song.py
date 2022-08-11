@@ -33,12 +33,6 @@ import ffmpeg
 import lyricsgenius
 from youtubesearchpython import VideosSearch
 
-bot = Client(
-    "Epic Developers",
-    api_id=API_ID,
-    api_hash=API_HASH,
-    bot_token=BOT_TOKEN
-)
 
 def humanbytes(size):
     if not size:
@@ -498,4 +492,4 @@ __{S.lyrics}__"""
     else:
         await m.edit(xxx)
 
-bot.run()
+
