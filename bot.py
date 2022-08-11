@@ -27,7 +27,6 @@ from functools import partial
 from io import BytesIO
 from urllib.parse import urlparse
 from utils.arq import *
-from utils.past import paste
 
 import ffmpeg
 
