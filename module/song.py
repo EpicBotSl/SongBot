@@ -33,6 +33,7 @@ import ffmpeg
 import lyricsgenius
 from youtubesearchpython import VideosSearch
 
+bot = Client
 
 def humanbytes(size):
     if not size:
