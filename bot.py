@@ -445,12 +445,12 @@ async def lyricssex(_, CallbackQuery):
     userid = CallbackQuery.from_user.id
     usr = f"[{CallbackQuery.from_user.first_name}](tg://user?id={userid})"
     xxx = f"""
-▇▅▃▇▆▇▊▋__{query}__ ▊▇▆▅▄▅▇
+▇▃▇▆▇▊▋ **{S.title}** ▊▇▆▅▄▅
 
-⬬ ʙʏ : {S.artist}
+ʙʏ: ||{S.artist}||
 
 
-{S.lyrics}"""
+__{S.lyrics}__"""
     if len(xxx) > 4096:
         filename = "lyrics.txt"
         with open(filename, "w+", encoding="utf8") as out_file:
@@ -478,12 +478,12 @@ async def lrsearch(_, message: Message):
     if S is None:
         return await m.edit("Lyrics not found :p")
     xxx = f"""
-▇▅▃▇▆▇▊▋__{query}__ ▊▇▆▅▄▅▇
+▇▅▃▇▆▇ **{S.title}** ▇▆▅▄▅▇
 
-⬬ ʙʏ : {S.artist}
+ʙʏ : ||{S.artist}||
 
 
-{S.lyrics}"""
+__{S.lyrics}__"""
     if len(xxx) > 4096:
         await m.delete()
         filename = "lyrics.txt"
