@@ -1,6 +1,6 @@
 from asyncio import gather
 
-from utils.arq aiohttpsession as session
+from .arq aiohttpsession as session
 
 
 async def get(url: str, *args, **kwargs):
