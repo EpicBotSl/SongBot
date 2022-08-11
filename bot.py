@@ -20,13 +20,14 @@ import aiofiles
 import aiohttp
 import wget
 
-from arq import aiohttpsession as session
+from utils.arq import aiohttpsession as session
 import os
 from asyncio import get_running_loop
 from functools import partial
 from io import BytesIO
 from urllib.parse import urlparse
-from arq import *
+from utils.arq import *
+from utils.past import paste
 
 import ffmpeg
 
