@@ -1,7 +1,7 @@
 from epic import bot
 from os import sys,mkdir,path
 from aiogram import executor
-from misc import dp
+from epic import dp
 import handler
 
 if __name__ == "__main__":
