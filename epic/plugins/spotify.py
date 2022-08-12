@@ -9,6 +9,7 @@ from os import mkdir
 import os
 import shutil
 from random import randint
+from epic import *
 import random
 #import eyed3 
 from mutagen import File
