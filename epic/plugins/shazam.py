@@ -1,5 +1,6 @@
 from pyrogram import filters, types
 from epic import bot
+from epic import *
 from pyrogram import *
 from pyrogram.types import *
 import os
