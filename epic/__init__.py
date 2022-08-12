@@ -6,6 +6,8 @@ from Python_ARQ import ARQ
 from aiohttp import ClientSession
 from dotenv import load_dotenv
 load_dotenv("config.env")
+from aiogram import Bot, Dispatcher
+from shazamio import Shazam
 
 logging.basicConfig(
     level=logging.DEBUG, format="%(asctime)s - %(message)s",
@@ -50,7 +52,16 @@ class bot(Client):
     async def stop(self,*args):
         await super().stop()
         LOGGER.info("Bot Stopped, Bye.")
+
 #---------------------------Gen Logo Epic-------------------------------------#
+API_TOKEN = 'BOT_TOKEN'
+logging.basicConfig(level=logging.INFO)
+bot = Bot(token=API_TOKEN)
+dp = Dispatcher(bot)
+shazam = Shazam()
+
+#&-&-&-&-&-&-&-&-&-&-&-&-&-&-&-&-&-&-&---&-#
+
 
     async def start(self):
         await super().start()
@@ -88,3 +99,4 @@ class bot(Client):
             return tracks
         except KeyError:
             return None
+
