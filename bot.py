@@ -7,43 +7,45 @@ import logging
 from pyrogram import Client, idle
 from pyromod import listen  # type: ignore
 from pyrogram.errors import ApiIdInvalid, ApiIdPublishedFlood, AccessTokenInvalid
+import logging
+
 
 logging.basicConfig(
-    level=logging.WARNING, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    level=logging.DEBUG, format="%(asctime)s - %(message)s",
+    handlers = [logging.FileHandler('bot.log'), logging.StreamHandler()]
 )
-
-bot = Client(
-    "Epic Developers",
-    api_id=API_ID,
-    api_hash=API_HASH,
-    bot_token=BOT_TOKEN,
-    in_memory=True,
-    plugins=dict(root="plugins"),
-)
+logging.getLogger("pyrogram").setLevel(logging.WARNING)
+LOGGER = logging.getLogger(__name__)
 
 
-if __name__ == "__main__":
-    print("⌛Updating & Analyzing bot⏳")
-    try:
-        bot.start()
-    except (ApiIdInvalid, ApiIdPublishedFlood):
-        raise Exception("Your API_ID/API_HASH is not valid.")
-    except AccessTokenInvalid:
-        raise Exception("Your BOT_TOKEN is not valid.")
-    uname = bot.get_me().username
-    print(f"""@{uname} is Accepted
-╔════╗────────╔═══╗
-║╔╗╔╗║────────║╔══╝
-╚╝║║╠╩═╦══╦╗╔╗║╚══╦══╦╦══╗
-──║║║║═╣╔╗║╚╝║║╔══╣╔╗╠╣╔═╝
-──║║║║═╣╔╗║║║║║╚══╣╚╝║║╚═╗
-──╚╝╚══╩╝╚╩╩╩╝╚═══╣╔═╩╩══╝
-──────────────────║║
-──────────────────╚╝
-Join For update @EpicBotsSl""")
-    idle()
-    bot.stop()
-    print("Bot stopped. Alvida!")
+
+AUTH_CHATS = "-1001741009206"
+
+class bot(Client):
+    def  __init__(self):
+        name = self.__class__.__name__.lower()
+        super().__init__(
+            ":memory:",
+            plugins=dict(root=f"{name}/plugins"),
+            workdir="./cache/",
+            api_id=API_ID,
+            api_hash=API_HASH,
+            bot_token=BOT_TOKEN,
+            sleep_threshold=30
+        )
+    async def start(self):
+        global BOT_INFO
+        await super().start()
+        BOT_INFO = await self.get_me()
+        if not path.exists('/tmp/thumbnails/'):
+            mkdir('/tmp/thumbnails/')
+        for chat in AUTH_CHATS:
+            await self.send_photo(chat,"https://telegra.ph/file/97bc8a091ac1b119b72e4.jpg","**Spotify Downloa Started**")
+        LOGGER.info(f"Bot Started As {BOT_INFO.username}\n")
+    
+    async def stop(self,*args):
+        await super().stop()
+        LOGGER.info("Bot Stopped, Bye.")
 #---------------------------Gen Logo Epic-------------------------------------#
 
     async def start(self):
