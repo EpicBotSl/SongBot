@@ -15,7 +15,10 @@ import random
 from mutagen import File
 from mutagen.flac import FLAC ,Picture
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-client = spotipy.Spotify(auth_manager=spotipy.oauth2.SpotifyClientCredentials())
+
+client = spotipy.Spotify(
+    client_credentials_manager=SpotifyClientCredentials(client_id='a145db3dcd564b9592dacf10649e4ed5',
+                                                        client_secret='389614e1ec874f17b8c99511c7baa2f6'))
 
 #PICS = ("mbot/1162775.jpg mbot/danny-howe-bn-D2bCvpik-unsplash.jpg mbot/saurabh-gill-38RthwbB3nE-unsplash.jpg").split()
 
