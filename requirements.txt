@@ -77,4 +77,3 @@ lyricsgenius
 shazamio==0.0.2
 ShazamAPI
 aiogram
-exceptions
