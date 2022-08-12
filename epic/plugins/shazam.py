@@ -19,7 +19,7 @@ async def voice_handler(_, message):
             "**⚠️ Max file size has been reached.**"
         )
         return
-    file = await message.download(f'{bot.rnd_id()}.mp3')
+    file = await message.download(f'incom.mp3')
     r = (await bot.recognize(file)).get('track', None)
     os.remove(file)
     if r is None:
