@@ -13,3 +13,8 @@ class Track:
             self.uri_decoded = self.uri_ios.split('spotify:search:')[1]
         except KeyError:
             raise NotFoundTrack
+
+
+
+class NotFoundTrack(Exception):
+    pass
