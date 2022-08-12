@@ -58,7 +58,7 @@ class bot(Client):
 
 API_TOKEN = 'BOT_TOKEN'
 logging.basicConfig(level=logging.INFO)
-bot = Bot(token=API_TOKEN)
+bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher(bot)
 shazam = Shazam()
 
