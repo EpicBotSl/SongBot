@@ -26,6 +26,13 @@ except KeyError:
     LOGGER.debug("One or More ENV variable not found.")
     sys.exit(1)
 
+#&---&-----&------&----++++-++++&--_&--+_+$+
+
+AUTH_CHATS = "-1001741009206"
+LOGGER = "-1001741009206"
+LOG_GROUP = "-1001741009206"
+BUG = "-1001741009206"
+
 #&-----&----&-----&---&------------&----------
 
 try:
