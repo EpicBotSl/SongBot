@@ -5,7 +5,7 @@ from pyrogram import *
 from pyrogram.types import *
 from epic.covert import NotFoundTrack
 from epic.covert import Track
-from epic import bot *
+from epic import bot 
 
 
 @bot.on_message(filters.audio)
