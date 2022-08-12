@@ -1,1 +1,1 @@
-bot: python -m epic
+worker: python epic
