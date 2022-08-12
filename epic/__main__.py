@@ -1,4 +1,4 @@
-from mbot import Mbot
+from epic import bot
 from os import sys,mkdir,path
 
 if __name__ == "__main__":
