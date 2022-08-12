@@ -33,7 +33,7 @@ import ffmpeg
 import lyricsgenius
 from youtubesearchpython import VideosSearch
 
-bot = Client
+from epic import bot
 
 
 
