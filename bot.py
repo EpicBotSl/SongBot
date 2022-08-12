@@ -1,7 +1,7 @@
 from os import path
 from configparser import ConfigParser 
 from shazamio import Shazam, exceptions, FactoryArtist, FactoryTrack
-fimport config 
+import config 
 from config import *
 import logging
 from pyrogram import Client, idle
