@@ -14,6 +14,13 @@ logging.basicConfig(
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 LOGGER = logging.getLogger(__name__)
 
+try:
+    API_ID = int(environ['API_ID'])
+    API_HASH = environ['API_HASH']
+    BOT_TOKEN = environ['BOT_TOKEN']
+except KeyError:
+    LOGGER.debug("One or More ENV variable not found.")
+    sys.exit(1)
 
 
 AUTH_CHATS = "-1001741009206"
