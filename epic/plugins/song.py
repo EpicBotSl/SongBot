@@ -29,11 +29,10 @@ from urllib.parse import urlparse
 
 import ffmpeg
 
+from epic import bot 
 
 import lyricsgenius
 from youtubesearchpython import VideosSearch
-
-bot = Client
 
 def humanbytes(size):
     if not size:
