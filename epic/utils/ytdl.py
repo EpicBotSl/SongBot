@@ -1,6 +1,7 @@
 from asgiref.sync import sync_to_async
 from yt_dlp import YoutubeDL
 from requests import get
+from epic import *
 
 @sync_to_async
 def getIds(video):
