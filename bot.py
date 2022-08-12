@@ -1,14 +1,11 @@
-from os import path
-from configparser import ConfigParser 
-from shazamio import Shazam, exceptions, FactoryArtist, FactoryTrack
-import config 
-from config import *
+from pyrogram import Client
+from os import environ,sys,mkdir,path
 import logging
-from pyrogram import Client, idle
-from pyromod import listen  # type: ignore
-from pyrogram.errors import ApiIdInvalid, ApiIdPublishedFlood, AccessTokenInvalid
-import logging
-
+from sys import executable
+from Python_ARQ import ARQ
+from aiohttp import ClientSession
+from dotenv import load_dotenv
+load_dotenv("config.env")
 
 logging.basicConfig(
     level=logging.DEBUG, format="%(asctime)s - %(message)s",
