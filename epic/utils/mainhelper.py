@@ -3,6 +3,7 @@ from random import randint
 from yt_dlp import YoutubeDL
 from epic import LOGGER,LOG_GROUP,BUG
 from requests import get
+from epic import *
 from asgiref.sync import sync_to_async
 
 
