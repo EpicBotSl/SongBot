@@ -1,7 +1,7 @@
 from aiogram import types
 from epic import *
-from exceptions import NotFoundTrack
-from epic.convert import Track
+from epic.covert import NotFoundTrack
+from epic.covert import Track
 
 
 @dp.message_handler(content_types=[types.ContentType.VOICE])
