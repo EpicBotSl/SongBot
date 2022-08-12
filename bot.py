@@ -1,31 +1,49 @@
 from os import path
-from configparser import ConfigParser
-from pyrogram import Client
+from configparser import ConfigParser 
 from shazamio import Shazam, exceptions, FactoryArtist, FactoryTrack
+fimport config 
 from config import *
-import os
+import logging
+from pyrogram import Client, idle
+from pyromod import listen  # type: ignore
+from pyrogram.errors import ApiIdInvalid, ApiIdPublishedFlood, AccessTokenInvalid
 
-shazam = Shazam()
+logging.basicConfig(
+    level=logging.WARNING, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
 
-class bot(Client):
-    def __init__(self, name):
-        config_file = f"{name}.ini"
-        config = ConfigParser()
-        config.read(config_file)
-        name = name.lower()
-        plugins = {'root': path.join(__package__, 'plugins')}
-        api_id = config.get('pyrogram', 'API_ID')
-        api_hash = config.get('pyrogram', 'API_HASH')
-        super().__init__(
-            name,
-            api_id=api_id,
-            api_hash=api_hash,
-            config_file=config_file,
-            workers=16,
-            plugins=plugins,
-            workdir="./",
-        )
+bot = Client(
+    "Epic Developers",
+    api_id=API_ID,
+    api_hash=API_HASH,
+    bot_token=BOT_TOKEN,
+    in_memory=True,
+    plugins=dict(root="module"),
+)
 
+
+if __name__ == "__main__":
+    print("⌛Updating & Analyzing bot⏳")
+    try:
+        bot.start()
+    except (ApiIdInvalid, ApiIdPublishedFlood):
+        raise Exception("Your API_ID/API_HASH is not valid.")
+    except AccessTokenInvalid:
+        raise Exception("Your BOT_TOKEN is not valid.")
+    uname = bot.get_me().username
+    print(f"""@{uname} is Accepted
+╔════╗────────╔═══╗
+║╔╗╔╗║────────║╔══╝
+╚╝║║╠╩═╦══╦╗╔╗║╚══╦══╦╦══╗
+──║║║║═╣╔╗║╚╝║║╔══╣╔╗╠╣╔═╝
+──║║║║═╣╔╗║║║║║╚══╣╚╝║║╚═╗
+──╚╝╚══╩╝╚╩╩╩╝╚═══╣╔═╩╩══╝
+──────────────────║║
+──────────────────╚╝
+Join For update @EpicBotsSl""")
+    idle()
+    bot.stop()
+    print("Bot stopped. Alvida!")
 #---------------------------Gen Logo Epic-------------------------------------#
 
     async def start(self):
