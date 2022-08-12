@@ -2,7 +2,6 @@ from epic import bot
 from os import sys,mkdir,path
 from aiogram import executor
 from epic import dp
-import handler
 
 if __name__ == "__main__":
     if not path.exists("cache"):
