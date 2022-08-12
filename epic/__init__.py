@@ -26,6 +26,19 @@ except KeyError:
     LOGGER.debug("One or More ENV variable not found.")
     sys.exit(1)
 
+#&-----&----&-----&---&------------&----------
+
+try:
+    ARQ_API_KEY = "JRBVAR-JICHKN-DFLDNX-NPRGCH-ARQ"
+    ARQ_API_URL = "https://arq.hamker.in"
+    aiohttpsession = ClientSession()
+    arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
+
+except Exception as e:
+    pass
+    print(f"python arq key is not a valid string skiping it ...! Reason:{e}")
+    aiohttpsession = ClientSession()
+    arq = None
 
 
 class bot(Client):
