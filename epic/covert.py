@@ -1,4 +1,7 @@
-from exceptions import NotFoundTrack
+
+class NotFoundTrack(Exception):
+    pass
+
 
 class Track:
     def __init__(self, music):
@@ -15,6 +18,3 @@ class Track:
             raise NotFoundTrack
 
 
-
-class NotFoundTrack(Exception):
-    pass
