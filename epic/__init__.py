@@ -9,6 +9,7 @@ load_dotenv("config.env")
 from aiogram import Bot, Dispatcher
 from shazamio import Shazam
 from aiogram import executor
+from config import *
 
 logging.basicConfig(
     level=logging.DEBUG, format="%(asctime)s - %(message)s",
@@ -26,7 +27,6 @@ except KeyError:
     sys.exit(1)
 
 
-AUTH_CHATS = "EpicDevelopers"
 
 class bot(Client):
     def  __init__(self):
