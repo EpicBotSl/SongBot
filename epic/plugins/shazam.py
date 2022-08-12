@@ -1,10 +1,15 @@
 from aiogram import types
 from epic import *
+from pyrogram import filters
+from pyrogram import *
+from pyrogram.types import *
 from epic.covert import NotFoundTrack
 from epic.covert import Track
+from epic import bot *
 
 
-@dp.message_handler(content_types=[types.ContentType.VOICE])
+@bot.on_message(filters.audio)
+async def start(client, message):
 async def recognize_song(message: types.Message):
     voice = await message.voice.download()
     info = await shazam.recognize_song(voice.name)
