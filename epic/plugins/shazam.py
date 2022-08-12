@@ -1,64 +1,60 @@
-from pyrogram import filters, types
-from epic import bot
-from epic import *
-from pyrogram import *
-from pyrogram.types import *
 import os
-from shazamio import Shazam, exceptions, FactoryArtist, FactoryTrack
+import logging
+import ffmpeg
+import asyncio
+import json
+import requests
+from ShazamAPI import Shazam
 
-shazam = Shazam()
+from pyrogram import filters, idle
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from epic import bot
+
+@bot.on_message(filters.private & filters.audio)
+async def shazam(_, message):
+    user_id = message.from_user.id
+    DL = "./{user_id}"
+    m = await message.reply_text("**Shazam Processing**")
+    a = await bot.download_media(message, DL)
+    try:
+       mp3_file_content_to_recognize = open(a, 'rb').read()
+       shazam = Shazam(mp3_file_content_to_recognize)
+       recognize_generator = shazam.recognizeSong()
+       output = next(recognize_generator)
+       cj = json.dumps(output)
+    except:
+       return await m.edit("**Error**")
+
+    key = 'XBH4IgeIY2D40O6RAjn4r8vMav7xy6IN'
+    text = cj
+    t_title = "Shazam By JE"
+
+    login_data = {
+       'api_dev_key': key,
+       'api_user_name': 'JasonYako',
+       'api_user_password': 'Lel@takataka9'
+        }
+    data = {
+       'api_option': 'paste',
+       'api_dev_key':key,
+       'api_paste_code':text,
+       'api_paste_name':t_title,
+       'api_paste_expire_date': 'N',
+       'api_user_key': None,
+       'api_paste_format': None,
+        }
+
+    login = requests.post("https://pastebin.com/api/api_login.php", data=login_data)
+
+    r = requests.post("https://pastebin.com/api/api_post.php", data=data)
+
+    txt = "**Shazam Done ✨\n\nBy ~ @TheTeleRoid**"
+    await m.edit(txt, reply_markup=InlineKeyboardMarkup(
+                                [[InlineKeyboardButton(
+                                     "Results 📃", url=f"{r.text}")]]))
+    os.remove(a)
 
 
-max_file = 30641629
-
-@bot.on_message(filters.audio | filters.video | filters.voice)
-async def voice_handler(_, message):
-    file_size = message.audio or message.video or message.voice
-    if max_file < file_size.file_size :
-        await message.reply_text(
-            "**⚠️ Max file size has been reached.**"
-        )
-        return
-    file = await message.download(f'incom.mp3')
-    r = (await bot.recognize(file)).get('track', None)
-    os.remove(file)
-    if r is None:
-        await message.reply_text(
-            '**⚠️ Cannot recognize the audio**'
-        )
-        return
-    out = f'**Title**: `{r["title"]}`\n'
-    out += f'**Artist**: `{r["subtitle"]}`\n'
-    buttons = [
-            [
-                types.InlineKeyboardButton(
-                    '🎼 Related Songs',
-                    switch_inline_query_current_chat=f'related {r["key"]}',
-                ),
-                types.InlineKeyboardButton(
-                    '🔗 Share',
-                    url=f'{r["share"]["html"]}'
-                )
-            ],
-            [
-                types.InlineKeyboardButton(
-                    '🎵 Listen',
-                    url=f'{r["url"]}'
-                )
-            ],        
-        ]
-    response = r.get('artists', None)
-    if response:
-        buttons.append(
-            [
-                types.InlineKeyboardButton(
-                    f'💿 More Tracks from {r["subtitle"]}',
-                    switch_inline_query_current_chat=f'tracks {r["artists"][0]["id"]}',
-                )
-            ]
-        )
-    await message.reply_photo(
-        r['images']['coverarthq'],
-        caption=out,
-        reply_markup=types.InlineKeyboardMarkup(buttons)
-    )
+print(f"""
+SHaZam Alive
+""")
