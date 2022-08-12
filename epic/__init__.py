@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 load_dotenv("config.env")
 from aiogram import Bot, Dispatcher
 from shazamio import Shazam
+from aiogram import executor
 
 logging.basicConfig(
     level=logging.DEBUG, format="%(asctime)s - %(message)s",
@@ -61,6 +62,10 @@ logging.basicConfig(level=logging.INFO)
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher(bot)
 shazam = Shazam()
+
+
+if __name__ == '__main__':
+    executor.start_polling(dp, skip_updates=True)
 
 #&-&-&-&-&-&-&-&-&-&-&-&-&-&-&-&-&-&-&---&-#
 
