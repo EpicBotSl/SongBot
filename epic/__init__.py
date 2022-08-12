@@ -26,7 +26,7 @@ except KeyError:
     sys.exit(1)
 
 
-AUTH_CHATS = "-1001741009206"
+AUTH_CHATS = "EpicDevelopers"
 
 class bot(Client):
     def  __init__(self):
