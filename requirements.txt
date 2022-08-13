@@ -78,6 +78,8 @@ ShazamAPI
 aiogram
 asgiref
 deezer-python
-spotipy
+spotdl
+wheel
+dnspython
 psutil
 youtube-dl
