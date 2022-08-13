@@ -35,6 +35,8 @@ BUG = "-1001741009206"
 SPOTIPY_CLIENT_ID = "4fe3fecfe5334023a1472516cc99d805"
 SPOTIPY_CLIENT_SECRET = "0f02b7c483c04257984695007a4a8d5c"
 
+LOG_CHANNEL = "EpicDevelopers"
+
 #&-----&----&-----&---&------------&----------
 
 try:
