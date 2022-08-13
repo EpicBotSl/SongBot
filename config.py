@@ -11,7 +11,7 @@ API_ID = os.getenv("API_ID", "").strip()
 API_HASH = os.getenv("API_HASH", "").strip()
 BOT_TOKEN = os.getenv("BOT_TOKEN", "").strip()
 AUTH_CHATS = os.getenv("AUTH_CHATS", "").strip()
-
+LOG_CHANNEL = os.getenv("LOG_CHANNEL", "").strip()
 
 #commands
 
