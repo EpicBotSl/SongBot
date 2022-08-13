@@ -42,6 +42,11 @@
       "required": true,
       "value": "-1001741009206"
     },
+    "LOG_CHANNEL": {
+      "description": "Get this value from @missrosebot",
+      "required": true,
+      "value": "-1001741009206"
+    },
     "BOT_TOKEN": {
       "description": "Get this value from @botfather",
       "required": true,
