@@ -16,6 +16,19 @@ import requests as r
 import wget
 
 
+def get_text(message: Message) -> [None, str]:
+    """Extract Text From Commands"""
+    text_to_return = message.text
+    if message.text is None:
+        return None
+    if " " in text_to_return:
+        try:
+            return message.text.split(None, 1)[1]
+        except IndexError:
+            return None
+    else:
+        return None
+
 @bot.on_message(filters.command("deezer"))
 async def deezergeter(client: Client, message: Message):
     rep = await message.reply("`Searching For Song On Deezer.....`")
