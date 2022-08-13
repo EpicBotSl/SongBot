@@ -18,7 +18,7 @@ import wget
 
 @bot.on_message(filters.command("deezer"))
 async def deezergeter(client: Client, message: Message):
-    rep = await message.edit_text("`Searching For Song On Deezer.....`")
+    rep = await message.reply("`Searching For Song On Deezer.....`")
     sgname = get_text(message)
     if not sgname:
         await rep.edit(
