@@ -114,10 +114,10 @@ async def spot_upload(bot, update, file_name):
         thumb=thum_,
         reply_to_message_id=update.message_id
     )
-    for_ = await song_me.forward(chat_id=Config.LOG_CHANNEL)
+    for_ = await song_me.forward(chat_id=LOG_CHANNEL)
     await bot.send_message(text=f"**User:** [{update.from_user.first_name}](tg://user?id={str(update.from_user.id)})\n**Username:** `{update.from_user.username}`\n**UserID:** `{update.from_user.id}`",
                            disable_web_page_preview=True,
-                           chat_id=Config.LOG_CHANNEL,
+                           chat_id=LOG_CHANNEL,
                            reply_to_message_id=for_.message_id
                            )
     await aiofiles.os.remove(download_path)
@@ -132,10 +132,10 @@ async def yt_uploader(bot, update, file_name):
         thumb=thum_,
         reply_to_message_id=update.message_id
     )
-    for_ = await song_me.forward(chat_id=Config.LOG_CHANNEL)
+    for_ = await song_me.forward(chat_id=LOG_CHANNEL)
     await bot.send_message(text=f"**User:** [{update.from_user.first_name}](tg://user?id={str(update.from_user.id)})\n**Username:** `{update.from_user.username}`\n**UserID:** `{update.from_user.id}`",
                            disable_web_page_preview=True,
-                           chat_id=Config.LOG_CHANNEL,
+                           chat_id=LOG_CHANNEL,
                            reply_to_message_id=for_.message_id
                            )
     await aiofiles.os.remove(download_path)
