@@ -1,4 +1,6 @@
-
+from pyrogram import filters 
+from pyrogram import *
+from pyrogram.types import * 
 import aiofiles
 import asyncio
 import os
