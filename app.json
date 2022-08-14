@@ -52,13 +52,13 @@
       "required": true,
       "value": ""
     },
-    "SPOTIPY_CLIENT_SECRET": {
-      "description": "The client secret of the Spotify API",
-      "value": "0f02b7c483c04257984695007a4a8d5c"
+    "BOT_OWNER": {
+      "description": "Owner Id",
+      "value": "5196689118"
     },
-    "SPOTIPY_CLIENT_ID": {
-      "description": "The client ID of the Spotify API",
-      "value": "4fe3fecfe5334023a1472516cc99d805"
+    "DATABASE_URL": {
+      "description": "get this value from https://mongodb.com",
+      "value": "mongodb+srv://Navanjana:Navanjana@cluster0.zdnpe.mongodb.net/Navanjana=true&w=majority"
     },
     "API_HASH": {
       "description": "Get this value from my.telegram.org.",
