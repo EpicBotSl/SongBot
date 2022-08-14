@@ -1,4 +1,6 @@
 from config import *
 from database.database import Database
+import pymongo
 
-db = Database(mongodb+srv://epic:epic@cluster0.257eaxu.mongodb.net/?retryWrites=true&w=majority, "spot_dl")
+DATABASE_URL=MONGO_URI
+db = Database(DATABASE_URL, "aprt_bot")
