@@ -69,11 +69,12 @@ db = Database(DATABASE_URL, "epbot")
 #lfpwkq
 
 START_BUTTON = InlineKeyboardMarkup([[
-                 InlineKeyboardButton('📞 HELPS', callback_data="hp")
+                 InlineKeyboardButton('📞 HELPS', callback_data="hp"),
+                 InlineKeyboardButton('✨ ABOUT ✨', callback_data="ab")
                  ],
                  [
-                 InlineKeyboardButton('✨ ABOUT ✨', callback_data="ab"),
-                 InlineKeyboardButton('</ᴇᴘɪᴄ ᴅᴇᴠᴇʟᴏᴘᴇʀꜱ</>🇱🇰', url="https://t.me/EpicBotsSl")
+                 InlineKeyboardButton('</ᴇᴘɪᴄ ᴅᴇᴠᴇʟᴏᴘᴇʀꜱ</>', url="https://t.me/EpicBotsSl"),
+                 InlineKeyboardButton('Support ❤️', url="https://t.me/EpicChats")
                  ]])
 
 START_MSG = f"""
@@ -146,4 +147,27 @@ async def start(client, message):
              #text="♻️Adding Soon.....",
         #)
 
+@bot.on_callback_query(filters.regex(pattern=r"hp"))
+async def close(b, cb):
+    await update.message.edit_text(
+             text=HELP,
+             reply_markup=M_BACK,
+             disable_web_page_preview=True
+
+@bot.on_callback_query(filters.regex(pattern=r"ab"))
+async def close(b, cb):
+    await update.message.edit_text(
+             text=ABOUT_TXT,
+             reply_markup=M_BACK,
+             disable_web_page_preview=True
+         )
+
+
+@bot.on_callback_query(filters.regex(pattern=r"mback"))
+async def close(b, cb):
+    await update.message.edit_text(
+             text=START_MSG,
+             reply_markup=START_BUTTON,
+             disable_web_page_preview=True
+         )
 
