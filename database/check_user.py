@@ -8,7 +8,7 @@ from script import *
 
 from database.db import Database
 
-db = Database(MONGO_URI, "telegraph_bot")  
+db = Database(MONGO_URL, "epbot")  
 
 async def handle_user_status(bot, cmd):
     chat_id = cmd.from_user.id
