@@ -30,7 +30,14 @@ HELP = """
 **✨How to download Song ?**
 Ex :
 `/search Justin Bieber lonely`
-or normaly send you want song Name
+or 
+`/music`
+`/song`
+
+**✨Download on yt**
+
+Ex :
+`/yt Believer`
 
 **✨How To Find Lyrics**
 
