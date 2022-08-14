@@ -98,7 +98,7 @@ def get_text(message: Message) -> [None, str]:
     except IndexError:
         return None
 
-@bot.on_message(filters.command('song') & ~filters.forwarded & filters.text & filters.private)
+@bot.on_message(filters.command('yt') & ~filters.forwarded & filters.text & filters.private)
 def song(client, message):
 
     user_id = message.from_user.id 
@@ -278,7 +278,7 @@ def time_to_seconds(time):
 #---------------------------Gen Logo Epic-------------------------------------#
 #---------------------------Gen Logo Epic-------------------------------------#
 
-@bot.on_message(filters.command("search"))
+@bot.on_message(filters.command(["song", "search", "music"]))
 async def ytsearch(client, message):
     try:
         if len(message.command) < 2:
