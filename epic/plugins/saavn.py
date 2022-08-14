@@ -14,7 +14,7 @@ async def download_song(url):
     return song
 is_downloading = False
 
-@bot.on_message(filters.command("saavn") & ~filters.edited)
+@bot.on_message(filters.command("saavn"))
 async def jssong(_, message):
     global is_downloading
     if len(message.command) < 2:
