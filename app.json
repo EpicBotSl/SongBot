@@ -56,7 +56,7 @@
       "description": "Owner Id",
       "value": "5196689118"
     },
-    "DATABASE_URL": {
+    "MONGO_URL": {
       "description": "get this value from https://mongodb.com",
       "value": ""
     },
