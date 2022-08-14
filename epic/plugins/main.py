@@ -4,6 +4,7 @@ from epic import bot
 from pyrogram import *
 from pyrogram.types import *
 from config import *
+from epic.stat import *
 from epic.broadcast import broadcast_handler
 from database.access_db  import db
 from epic.fsub import *
@@ -87,3 +88,8 @@ async def tgm(bot, update):
              reply_markup=START_BUTTON,
              disable_web_page_preview=True
          )
+
+
+@bot.on_message(filters.command('stats') & filters.user(BOT_OWNER))
+async def c_status(bot, update):
+    await status(bot, update)
