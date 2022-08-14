@@ -19,7 +19,6 @@ from json import JSONDecodeError
 import requests
 from pyrogram import filters
 
-from epic fetch_audio
 from epic import bot
 
 async def fetch_audio(client, message):
