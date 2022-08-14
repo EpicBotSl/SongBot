@@ -58,7 +58,7 @@
     },
     "DATABASE_URL": {
       "description": "get this value from https://mongodb.com",
-      "value": "mongodb+srv://Navanjana:Navanjana@cluster0.zdnpe.mongodb.net/Navanjana=true&w=majority"
+      "value": ""
     },
     "API_HASH": {
       "description": "Get this value from my.telegram.org.",
