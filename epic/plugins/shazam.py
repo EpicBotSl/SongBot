@@ -45,7 +45,7 @@ async def fetch_audio(client, message):
 
 @bot.on_message(filters.command(["identify", "shazam"]))
 async def shazamm(client, message):
-    kek = await message.reply(message, "`Shazaming In Progress!`")
+    kek = await message.reply("**Shazaming In Progress!**")
     if not message.reply_to_message:
         await kek.edit("Reply To The Audio.")
         return
