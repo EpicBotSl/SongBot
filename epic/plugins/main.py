@@ -55,6 +55,7 @@ ABOUT_TXT = f"""
 
 @bot.on_message(filters.command("start"))
 async def help(bot, message):
+    await db.add_user(update.chat.id)
     if await forcesub(bot, message):
        return
     await message.reply_photo("https://telegra.ph/file/ddaed04b00b6a96dbf7bb.jpg", caption=START_MSG, reply_markup=START_BUTTON)
