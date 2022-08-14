@@ -62,7 +62,16 @@ ABOUT_TXT = f"""
 
 @bot.on_message(filters.command("start"))
 async def help(bot, message):
-    await db.add_user(update.chat.id)
+    chat_id = message.from_user.id
+    if not await db.is_user_exist(chat_id):
+        data = await client.get_me()
+        BOT_USERNAME = data.username
+        await db.add_user(chat_id)
+        if EpicDevelopers:
+            await client.send_message(
+                EpicDevelopers,
+                f"#NEWUSER: \n\n**User:** [{message.from_user.first_name}](tg://user?id={message.from_user.id})\n\**ID:**{message.from_user.id}\n Started @EpSongBot !!",
+            )
     if await forcesub(bot, message):
        return
     await message.reply_photo("https://telegra.ph/file/ddaed04b00b6a96dbf7bb.jpg", caption=START_MSG, reply_markup=START_BUTTON)
