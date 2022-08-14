@@ -10,9 +10,10 @@ load_dotenv()
 API_ID = os.getenv("API_ID", "").strip()
 API_HASH = os.getenv("API_HASH", "").strip()
 BOT_TOKEN = os.getenv("BOT_TOKEN", "").strip()
+BOT_OWNER = os.getenv("BOT_OWNER", "").strip()
 AUTH_CHATS = os.getenv("AUTH_CHATS", "").strip()
 LOG_CHANNEL = os.getenv("LOG_CHANNEL", "").strip()
-
+DATABASE_URL = os.getenv("DATABASE_URL", "").strip()
 #commands
 
 
