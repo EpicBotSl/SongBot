@@ -16,6 +16,7 @@ from tswift import Song
 import io
 import re
 import time
+from epic.plugins.main import *
 
 import aiofiles
 import aiohttp
@@ -401,6 +402,31 @@ async def youtube_cb(b, cb):
 async def close(b, cb):
     await cb.answer("Closed!")
     await cb.message.delete()
+
+@bot.on_callback_query()  
+async def tgm(b, cb):  
+    if update.data == "add": 
+        await update.answer(
+             text="♻️Adding Soon.....",
+        )
+    elif update.data == "hp":
+         await update.message.edit_text(
+             text=HELP,
+             reply_markup=M_BACK,
+             disable_web_page_preview=True
+         )
+    elif update.data == "ab":
+         await update.message.edit_text(
+             text=ABOUT_TXT,
+             reply_markup=M_BACK,
+             disable_web_page_preview=True
+         )
+    elif update.data == "mback":
+         await update.message.edit_text(
+             text=START_MSG,
+             reply_markup=START_BUTTON,
+             disable_web_page_preview=True
+         )
 
 
 
