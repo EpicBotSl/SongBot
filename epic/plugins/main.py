@@ -153,6 +153,7 @@ async def close(b, cb):
              text=HELP,
              reply_markup=M_BACK,
              disable_web_page_preview=True
+       )
 
 @bot.on_callback_query(filters.regex(pattern=r"ab"))
 async def close(b, cb):
