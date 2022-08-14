@@ -58,7 +58,9 @@ async def help(bot, message):
        return
     await message.reply_photo("https://telegra.ph/file/ddaed04b00b6a96dbf7bb.jpg", caption=START_MSG, reply_markup=START_BUTTON)
 
-
+@bot.on_message(filters.command('broadcast') & filters.user(BOT_OWNER))
+async def c_status(_, update):
+    await broadcast_handler(update)
 
 
 @bot.on_callback_query()  
