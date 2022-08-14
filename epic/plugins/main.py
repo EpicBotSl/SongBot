@@ -162,5 +162,5 @@ async def tgm(bot, update):
              text=START_MSG,
              reply_markup=START_BUTTON,
              disable_web_page_preview=True
-         )
+         )#
 
