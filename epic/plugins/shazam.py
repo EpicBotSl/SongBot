@@ -1,3 +1,18 @@
+import asyncio
+import math
+import shlex
+import sys
+import time
+import traceback
+from functools import wraps
+from typing import Callable, Coroutine, Dict, List, Tuple, Union
+
+import aiohttp
+from pyrogram.errors import FloodWait, MessageNotModified
+from pyrogram.types import Chat, Message, User
+from pyrogram import filters
+
+
 import os
 from json import JSONDecodeError
 
@@ -7,6 +22,27 @@ from pyrogram import filters
 from epic fetch_audio
 from epic import bot
 
+async def fetch_audio(client, message):
+    time.time()
+    if not message.reply_to_message:
+        await message.reply("`Reply To A Video / Audio.`")
+        return
+    warner_stark = message.reply_to_message
+    if warner_stark.audio is None and warner_stark.video is None:
+        await message.reply("`Format Not Supported`")
+        return
+    if warner_stark.video:
+        lel = await message.reply("`Video Detected, Converting To Audio !`")
+        warner_bros = await message.reply_to_message.download()
+        stark_cmd = f"ffmpeg -i {warner_bros} -map 0:a friday.mp3"
+        await runcmd(stark_cmd)
+        final_warner = "friday.mp3"
+    elif warner_stark.audio:
+        lel = await edit_or_reply(message, "`Download Started !`")
+        final_warner = await message.reply_to_message.download()
+    await lel.edit("`Almost Done!`")
+    await lel.delete()
+    return final_warner
 
 @bot.on_message(filters.command(["identify", "shazam"]))
 async def shazamm(client, message):
