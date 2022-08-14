@@ -1,4 +1,4 @@
-from pyrogram.types *
+from pyrogram.types import *
 from database.access_db import db
 import shutil
 import psutil
