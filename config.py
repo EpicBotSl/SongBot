@@ -12,7 +12,7 @@ API_HASH = os.getenv("API_HASH", "").strip()
 BOT_TOKEN = os.getenv("BOT_TOKEN", "").strip()
 BOT_OWNER = os.getenv("BOT_OWNER", "").strip()
 AUTH_CHATS = os.getenv("AUTH_CHATS", "").strip()
-LOG_CHANNEL = os.getenv("LOG_CHANNEL", "").strip()
+LOG_CHANEL = os.getenv("LOG_CHANNEL", "").strip()
 MONGO_URL = os.getenv("MONGO_URL", "").strip()
 #commands
 
