@@ -69,19 +69,18 @@ db = Database(DATABASE_URL, "epbot")
 #lfpwkq
 
 START_BUTTON = InlineKeyboardMarkup([[
-                 InlineKeyboardButton('📞 HELPS', callback_data="hp"),
-                 InlineKeyboardButton('✨ ABOUT ✨', callback_data="ab")
-                 ],
-                 [
-                 InlineKeyboardButton('</ᴇᴘɪᴄ ᴅᴇᴠᴇʟᴏᴘᴇʀꜱ</>', url="https://t.me/EpicBotsSl"),
-                 InlineKeyboardButton('Support ❤️', url="https://t.me/EpicChats")
+                 InlineKeyboardButton('❤️ Chanel ❤️', callback_data="hp"),
+                 InlineKeyboardButton('✨ Group ✨', callback_data="ab")
                  ]])
 
 START_MSG = f"""
 🎶 Welcome To Song DownloaderBot ✓
 
 ✨You Can download Song & Get lyrics Using This Bot
-~ Click to help button to Know more about
+~ use command /help to know more about how to use
+~ use command /about to know more about
+
+❤️ Made With By @EpicBotsSl 👑
 """
 
 
@@ -129,7 +128,7 @@ async def start(client, message):
         BOT_USERNAME = data.username
         await db.add_user(chat_id)
         if LOG_CHANEL:
-            await client.send_message(
+            await bot.send_message(
                 LOG_CHANEL,
                 f"#NEWUSER: \n\n**User:** [{message.from_user.first_name}](tg://user?id={message.from_user.id})\n\**ID:**{message.from_user.id}\n Started @EpSongBot !!",
             )
@@ -139,36 +138,17 @@ async def start(client, message):
     await message.reply_photo("https://telegra.ph/file/ddaed04b00b6a96dbf7bb.jpg", caption=START_MSG, reply_markup=START_BUTTON)
 
 
+@bot.on_message(filters.command("help"))
+async def shrt(client, message):
+    if await forcesub(client, message):
+       return
+    await message.delete()
+    await message.reply_photo("https://telegra.ph/file/ddaed04b00b6a96dbf7bb.jpg", caption=HELP, reply_markup=START_BUTTON)
 
-#@bot.on_callback_query()  
-#async def tgm(bot, update):  
-    #if update.data == "add": 
-        #await update.answer(
-             #text="♻️Adding Soon.....",
-        #)
-
-@bot.on_callback_query(filters.regex(pattern=r"hp"))
-async def close(b, cb):
-    await update.message.edit_text(
-             text=HELP,
-             reply_markup=M_BACK,
-             disable_web_page_preview=True
-       )
-
-@bot.on_callback_query(filters.regex(pattern=r"ab"))
-async def close(b, cb):
-    await update.message.edit_text(
-             text=ABOUT_TXT,
-             reply_markup=M_BACK,
-             disable_web_page_preview=True
-         )
-
-
-@bot.on_callback_query(filters.regex(pattern=r"mback"))
-async def close(b, cb):
-    await update.message.edit_text(
-             text=START_MSG,
-             reply_markup=START_BUTTON,
-             disable_web_page_preview=True
-         )
+@bot.on_message(filters.command("help"))
+async def shrtrs(client, message):
+    if await forcesub(client, message):
+       return
+    await message.delete()
+    await message.reply_photo("https://telegra.ph/file/ddaed04b00b6a96dbf7bb.jpg", caption=ABOUT_TXT, reply_markup=START_BUTTON)
 
