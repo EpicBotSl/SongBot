@@ -158,17 +158,14 @@ __~ use command /help to know more about how to use
     )
 #=•=•=•=•=•=•=•Users Counts=•=•=•=•=•=•=•=•=•=•=•=•Epic Bots 2022© All Rights Resived•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=#
 
-@bot.on_message(filters.command("stat")) 
+@bot.on_message(filters.command("stats")) 
 async def startprivatsjwe(bot, message):
     countb = await db.total_users_count()
     countb = await db.total_users_count()
     count = await bot.get_chat_members_count(-1001620454933)
     counta = await bot.get_chat_members_count(-1001620454933)
-    text=f"""**❦𝘾𝙪𝙧𝙧𝙚𝙣𝙩 𝙎𝙩𝙖𝙩𝙨❦**
-▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰
- **❑ 𝐄𝐏𝐈𝐂 𝐃𝐄𝐕𝐒 ❑** : `{count}`
- **❍ 𝐒𝐓𝐈𝐂𝐊𝐄𝐑 𝐁𝐎𝐓 𝐔𝐒𝐄𝐑𝐒 ❍**: `{countb}`
-▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰
+    text=f"""
+ ❍ Song 𝐁𝐎𝐓 𝐔𝐒𝐄𝐑𝐒 ❍ : **{countb}**
  """
     await bot.send_sticker(message.chat.id, random.choice(STAT_STICKER))
     await bot.send_message(message.chat.id, text=text)
