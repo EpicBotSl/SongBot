@@ -69,8 +69,8 @@ db = Database(DATABASE_URL, "epbot")
 #lfpwkq
 
 START_BUTTON = InlineKeyboardMarkup([[
-                 InlineKeyboardButton('❤️ Chanel ❤️', user_id="EpicBotsSl"),
-                 InlineKeyboardButton('✨ Group ✨', user_id="EpicChats")
+                 InlineKeyboardButton('❤️ Chanel ❤️', url="t.me/EpicBotsSl"),
+                 InlineKeyboardButton('✨ Group ✨', url="t.me/EpicChats")
                  ]])
 
 START_MSG = f"""
