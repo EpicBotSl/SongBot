@@ -69,8 +69,8 @@ db = Database(DATABASE_URL, "epbot")
 #lfpwkq
 
 START_BUTTON = InlineKeyboardMarkup([[
-                 InlineKeyboardButton('❤️ Chanel ❤️', callback_data="hp"),
-                 InlineKeyboardButton('✨ Group ✨', callback_data="ab")
+                 InlineKeyboardButton('❤️ Chanel ❤️', user_id="EpicBotsSl"),
+                 InlineKeyboardButton('✨ Group ✨', user_id="EpicChats")
                  ]])
 
 START_MSG = f"""
@@ -84,7 +84,7 @@ START_MSG = f"""
 """
 
 
-HELP = """
+HELP = f"""
 **✨How to download Song ?**
 Ex :
 `/search Justin Bieber lonely`
@@ -124,7 +124,7 @@ async def start(client, message):
        return
     chat_id = message.from_user.id
     if not await db.is_user_exist(chat_id):
-        data = await client.get_me()
+        data = await bot.get_me()
         BOT_USERNAME = data.username
         await db.add_user(chat_id)
         if LOG_CHANEL:
@@ -135,7 +135,17 @@ async def start(client, message):
         else:
             logging.info(f"#NewUser :- Name : {message.from_user.first_name} ID : {message.from_user.id}")
     await message.delete()
-    await message.reply_photo("https://telegra.ph/file/ddaed04b00b6a96dbf7bb.jpg", caption=START_MSG, reply_markup=START_BUTTON)
+    await message.reply_photo("https://telegra.ph/file/ddaed04b00b6a96dbf7bb.jpg", caption=f"""
+💞 Hello ||{message.from_user.first_name}||
+**🎶 Welcome To [Ep Song Bot](t.me/Epsongbot) ✓**
+
+✨You Can download Song & Get lyrics Using This Bot
+
+__~ use command /help to know more about how to use
+~ use command /about to know more about__
+
+**❤️ Made With By @EpicBotsSl 👑**
+""", reply_markup=START_BUTTON)
 
 
 @bot.on_message(filters.command("help"))
@@ -145,7 +155,7 @@ async def shrt(client, message):
     await message.delete()
     await message.reply_photo("https://telegra.ph/file/ddaed04b00b6a96dbf7bb.jpg", caption=HELP, reply_markup=START_BUTTON)
 
-@bot.on_message(filters.command("help"))
+@bot.on_message(filters.command("about"))
 async def shrtrs(client, message):
     if await forcesub(client, message):
        return
