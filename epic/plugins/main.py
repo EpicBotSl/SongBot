@@ -118,32 +118,69 @@ ABOUT_TXT = f"""
       [ᴇᴘɪᴄ ᴅᴇᴠᴇʟᴏᴘᴇʀꜱ 🇱🇰](https://t.me/EpicBotsSl)
 """
 
+
 @bot.on_message(filters.command("start"))
-async def start(client, message):
-    if await forcesub(client, message):
+async def start(bot, message):
+    if await forcesub(bot, message):
        return
     chat_id = message.from_user.id
     if not await db.is_user_exist(chat_id):
+        data = await bot.get_me()
+        BOT_USERNAME = data.username
         await db.add_user(chat_id)
-        if LOG_CHANEL:
+        if -1001741009206:
             await bot.send_message(
-                LOG_CHANEL,
-                f"#NEWUSER: \n\n**User:** [{message.from_user.first_name}](tg://user?id={message.from_user.id})\n\**ID:**{message.from_user.id}\n Started @EpSongBot !!",
+                -1001741009206,
+                f"#NEWUSER: \n\n**User:** [{message.from_user.first_name}](tg://user?id={message.from_user.id})\n\**ID:**{message.from_user.id}\n Started @{BOT_USERNAME} !!",
             )
         else:
             logging.info(f"#NewUser :- Name : {message.from_user.first_name} ID : {message.from_user.id}")
     await message.delete()
-    await message.reply_photo("https://telegra.ph/file/ddaed04b00b6a96dbf7bb.jpg", caption=f"""
+    file_id = "CAACAgUAAxkBAAIzBWL6LFyjDEKrvpH8L0AdzQABvNpLAwAC5gcAAgPB0FehQqCWEtALkR4E"
+    await bot.send_sticker(message.chat.id, file_id)
+    text = f"""
 💞 Hello ||{message.from_user.first_name}||
+
 **🎶 Welcome To [Ep Song Bot](t.me/Epsongbot) ✓**
 
 ✨You Can download Song & Get lyrics Using This Bot
-
 __~ use command /help to know more about how to use
 ~ use command /about to know more about__
 
-**❤️ Made With By @EpicBotsSl 👑**
-""", reply_markup=START_BUTTON)
+
+**❤️ Made With By @EpicBotsSl 👑**"""
+    reply_markup = START_BUTTON  
+    await message.reply_text(
+        text=text,
+        reply_markup=reply_markup,
+        disable_web_page_preview=True,
+        quote=True
+    )
+#=•=•=•=•=•=•=•Users Counts=•=•=•=•=•=•=•=•=•=•=•=•Epic Bots 2022© All Rights Resived•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=#
+
+@bot.on_message(filters.command("stat")) 
+async def startprivatsjwe(bot, message):
+    countb = await db.total_users_count()
+    countb = await db.total_users_count()
+    count = await bot.get_chat_members_count(-1001620454933)
+    counta = await bot.get_chat_members_count(-1001620454933)
+    text=f"""**❦𝘾𝙪𝙧𝙧𝙚𝙣𝙩 𝙎𝙩𝙖𝙩𝙨❦**
+▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰
+ **❑ 𝐄𝐏𝐈𝐂 𝐃𝐄𝐕𝐒 ❑** : `{count}`
+ **❍ 𝐒𝐓𝐈𝐂𝐊𝐄𝐑 𝐁𝐎𝐓 𝐔𝐒𝐄𝐑𝐒 ❍**: `{countb}`
+▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰
+ """
+    await bot.send_sticker(message.chat.id, random.choice(STAT_STICKER))
+    await bot.send_message(message.chat.id, text=text)
+
+STAT_STICKER = ["CAACAgQAAxkBAAEFHRditZFgRBAPm-9bkFJUQKOjSEgxoQACfwsAAmgpeVF2roP_0GLhzykE",
+                "CAACAgQAAxkBAAEFHRVitZFYQ_EPOF7Y1GenAAHZOfu6xNIAAj4MAAKd3llQRh5-qJlCwa0pBA",
+                "CAACAgQAAxkBAAEFHRNitZFVEBwdq0uFJDOvDRx2IzdoCwAC5wwAAubdSFEk6BkQ4EbQ1ikE",
+                "CAACAgQAAxkBAAEFHRFitZFRwzQPYrVUQkxVP4yxF2Uw3gAC4AkAAu9GYFGTgHavjO_HLikE",
+                "CAACAgQAAxkBAAEFHQ9itZFNixLf7fEZICaK8DF-Li967wACUAwAAmEq4VF8xFsUvkvQXSkE"              
+         ]
+#=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•Epic Bots 2022© All Rights Resived•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=•=#
+#Callbacks✓
 
 
 @bot.on_message(filters.command("help"))
