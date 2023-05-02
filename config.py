@@ -14,6 +14,7 @@ BOT_OWNER = os.getenv("BOT_OWNER", "").strip()
 AUTH_CHATS = os.getenv("AUTH_CHATS", "").strip()
 LOG_CHANEL = os.getenv("LOG_CHANNEL", "").strip()
 MONGO_URL = os.getenv("MONGO_URL", "").strip()
+ENV = ANYTHING
 #commands
 
 
